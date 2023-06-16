@@ -1,22 +1,24 @@
-import { ElementsParams } from '../../../src/types/index';
+import { ElementsParams, Creator } from '../../../src/types/index';
 
 
-export default class ElementCreator {
-    constructor(param: ElementsParams) {
+export default class ElementCreator implements Creator{
+    element: null | HTMLElement;
+
+    constructor(param: ElementsParams){
         this.element = null;
         this.createElement(param);
     }
 
-    getElement() {
+    getElement(){
         return this.element;
     }
-    addInnerElement(element) {
-        if (element instanceof ElementCreator) {
-            this.element.append(element.getElement());
-        } else {
-            this.element.append(element);
-        }
-    }
+    // addInnerElement(element: HTMLElement) {
+    //     if (element instanceof ElementCreator) {
+    //         this.element?.append(element.getElement());
+    //     } else {
+    //         this.element?.append(element);
+    //     }
+    // }
 
     createElement(param: ElementsParams){
         this.element = document.createElement(param.tag);
@@ -26,12 +28,16 @@ export default class ElementCreator {
     }
 
     setCssClasses(cssClasses: Array<string>){
-        cssClasses.forEach((className) => this.element.classList.add(className));
+            cssClasses.forEach((className) => this.element?.classList.add(className));
     }
     setTextcontent(text: string){
-        this.createElement.textContent = text;
+        if(this.element){
+            this.element.textContent = text;
+        }
     }
     setCallback(callback: () => void){
-        this.element.addEventListener('click', (event) => callback(event))
+        if(this.element){
+            this.element.addEventListener('click', (event) => callback(event))
+        }
     }
 }

@@ -1,17 +1,21 @@
+import './footer.css';
+
 const CssClasses = {
     FOOTER: 'footer',
 }
 const TEXT = 'Made by @iozefavichus';
 
-export default class FooterView {
-  constructor() {
+export default class FooterView extends View {
+    constructor() {
+        const params = {
+            tag: 'section',
+            classNames: [CssClasses.FOOTER],
+        };
+        super(params);
+        this.configureView();
+    }
 
-  }
-
-  createView(){
-    const element = document.createElement('footer');
-    element.textContent = TEXT;
-    element.classList.add(CssClasses.FOOTER);
-    return element;
-  }
+    configureView() {
+        this.viewElementCreator.setTextContent(TEXT);
+    }
 }

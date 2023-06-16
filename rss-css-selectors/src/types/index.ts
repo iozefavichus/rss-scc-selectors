@@ -4,3 +4,18 @@ export type ElementsParams = {
     textContent: string,
     callback(): void,
 }
+
+export type ViewParams = {
+    tag: string,
+    classNames: Array<string>
+}
+
+export interface Creator{
+    element: HTMLElement | null,
+    // getElement(): HTMLElement | null,
+    // addInnerElement(),
+    // createElement(),
+    // setCssClasses(),
+    // setTextcontent(),
+    // setCallback(),
+}
