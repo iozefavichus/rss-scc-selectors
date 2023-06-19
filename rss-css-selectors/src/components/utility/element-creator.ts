@@ -24,7 +24,7 @@ export default class ElementCreator implements Creator{
         this.element = document.createElement(param.tag);
         this.setCssClasses(param.classNames);
         this.setTextcontent(param.textContent);
-        this.setCallback(param.callback);
+        // this.setCallback(param.callback);
     }
 
     setCssClasses(cssClasses: Array<string>){
@@ -35,9 +35,9 @@ export default class ElementCreator implements Creator{
             this.element.textContent = text;
         }
     }
-    setCallback(callback: () => void){
-        if(this.element){
-            this.element.addEventListener('click', (event) => callback(event))
-        }
-    }
+    // setCallback(callback: () => void){
+    //     if(this.element){
+    //         this.element.addEventListener('click', (event) => callback(event))
+    //     }
+    // }
 }

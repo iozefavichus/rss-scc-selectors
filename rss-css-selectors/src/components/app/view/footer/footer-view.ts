@@ -1,4 +1,5 @@
 import './footer.css';
+import View from '../view';
 
 const CssClasses = {
     FOOTER: 'footer',
