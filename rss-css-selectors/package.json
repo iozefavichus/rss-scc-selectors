@@ -9,9 +9,11 @@
   "@typescript-eslint/parser": "^5.59.11",
   "clean-webpack-plugin": "^4.0.0",
   "copy-webpack-plugin": "^11.0.0",
+  "css-loader": "^6.8.1",
   "eslint": "^8.42.0",
   "eslint-config-prettier": "^8.8.0",
   "eslint-webpack-plugin": "^4.0.1",
+  "html-loader": "^4.2.0",
   "html-webpack-plugin": "^5.5.3",
   "prettier": "2.8.8",
   "ts-loader": "^9.4.3",
@@ -23,5 +25,8 @@
  },
  "eslintIgnore": [
   "webpack.config.js"
- ]
+ ],
+ "dependencies": {
+  "style-loader": "^3.3.3"
+ }
 }

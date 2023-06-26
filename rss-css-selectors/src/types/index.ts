@@ -7,14 +7,16 @@ export type ElementsParams = {
 
 export type ViewParams = {
     tag: string,
-    classNames: Array<string>
+    classNames: Array<string>,
+    textContent: string,
+    callback(): void,
 }
 
 export interface Creator{
     element: HTMLElement | null,
-    // getElement(): HTMLElement | null,
-    // addInnerElement(),
-    // createElement(),
+    getElement(): HTMLElement | null,
+    addInnerElement(element: HTMLElement): void,
+    createElement(param: ElementsParams): void,
     // setCssClasses(),
     // setTextcontent(),
     // setCallback(),

@@ -19,11 +19,16 @@ const baseConfig = {
                 test: /\.ts$/i,
                 use: "ts-loader",
             },
+            {
+                test: /\.html$/i,
+                use: 'html-loader',
+            },
         ],
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['', '.ts', '.js', '.css'],
         plugins: [new TsconfigPathsPlugin()],
+        modules: ['node_modules'],
     },
     output: {
         filename: 'index.js',
