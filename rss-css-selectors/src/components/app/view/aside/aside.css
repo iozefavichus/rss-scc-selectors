@@ -1,0 +1,10 @@
+.aside {
+    position: fixed;
+    width: 375px;
+    right: 0;
+    top: 40px;
+    top: 0;
+    bottom: 0;
+    background: #221e18;
+    z-index: 1;
+  }

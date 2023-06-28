@@ -1,7 +1,7 @@
 import './footer.css';
-// import View from '../view';
 import ElementCreator from '../../../utility/element-creator';
-// import { ElementsParams, Creator } from '../../../../types/index';
+// import View from '../view';
+import { ElementsParams } from '../../../../types/index';
 
 const CssClasses = {
     FOOTER: 'footer',
@@ -9,20 +9,22 @@ const CssClasses = {
 const TEXT = 'Made by @iozefavichus';
 
 export default class FooterView{
+    elementCreator: ElementCreator;
+
     constructor() {
         this.elementCreator = this.createView();
     }
 
-    getHTMLElement() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getHtmlElement(): any {
         return this.elementCreator.getElement();
     }
 
     createView() {
-        const params ={
+        const params: ElementsParams ={
             tag: 'footer',
             classNames: [CssClasses.FOOTER],
-            textContent: TEXT,
-            callback: null,
+            textContent: TEXT
         };
         const elementCreator = new ElementCreator(params);
 

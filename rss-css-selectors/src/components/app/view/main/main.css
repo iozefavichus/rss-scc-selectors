@@ -1,0 +1,10 @@
+.main {
+    width: calc(100% - 375px);
+    text-align: center;
+    overflow-x: visible;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+  }
