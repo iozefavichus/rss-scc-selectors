@@ -9,25 +9,25 @@ const CssClasses = {
 const TEXT = 'CSS diner';
 
 export default class HeaderView{
-    elementCreator: ElementCreator;
+        elementCreator: ElementCreator;
 
-    constructor() {
-        this.elementCreator = this.createView();
-    }
+        constructor() {
+            this.elementCreator = this.createView();
+        }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getHtmlElement(): any {
-        return this.elementCreator.getElement();
-    }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        getHtmlElement(): any {
+            return this.elementCreator.getElement();
+        }
 
-    createView() {
-        const params: ElementsParams ={
-            tag: 'header',
-            classNames: [CssClasses.HEADER],
-            textContent: TEXT
-        };
-        const elementCreator = new ElementCreator(params);
+        createView() {
+            const params: ElementsParams ={
+                tag: 'header',
+                classNames: [CssClasses.HEADER],
+                textContent: TEXT
+            };
+            const elementCreator = new ElementCreator(params);
 
-        return elementCreator;
-    }
+            return elementCreator;
+        }
 }

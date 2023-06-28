@@ -1,0 +1,9 @@
+.editor {
+    position: relative;
+    text-align: left;
+    width: 90%;
+    margin: 0 auto;
+    border: solid 10px rgba(0,0,0,.35);
+    border-radius: 4px;
+    overflow: hidden;
+  }

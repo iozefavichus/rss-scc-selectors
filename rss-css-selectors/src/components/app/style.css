@@ -13,9 +13,9 @@
   body {
     background: #2e2a23;
     position: relative;
+    font-family: "Exo 2", "Lato", "Helvetica Neue", sans-serif;
   }
 
   h1, h2, h3, h4, h5 {
     font-weight: 600;
   }
-  

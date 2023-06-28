@@ -8,3 +8,25 @@
     left: 0;
     z-index: 2;
   }
+
+  .order {
+    color: rgba(255,255,255,.3);
+    font-size: 45px;
+    margin: 0;
+    font-weight: 400;
+    text-align: center;
+    padding: 20px 30px;
+}
+
+.note-toggle {
+    background: rgba(0,0,0,.2);
+    color: rgba(255,255,255,.3);
+    padding: 8px 15px 10px 15px;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+.note-toggle:hover {
+    text-decoration: underline;
+    color: rgba(255,255,255,.4);
+  }
