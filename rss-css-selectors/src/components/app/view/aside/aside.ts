@@ -14,8 +14,23 @@ const CssClasses = {
     NEXT: 'next',
     PROGRESS:'level-progress',
     PROG: 'progress',
+    DISPLAY: 'display-help',
+    SELNAME: 'selector-name',
+    TITLE: 'title',
+    SYNTAX: 'syntax',
+    HINT: 'hint',
+    EXAMTITLES: 'examples-title',
+    EXAM: 'examples',
+    LEVELMENU: 'level-menu',
+    LEVELS: 'levels',
+    RESET:'reset-progress',
+    MENUTOGGLEWRAP: 'level-menu-toggle-wrapper',
+    MENUTOGGLE: 'level-menu-toggle',
+
 };
 const TEXT = '';
+const TEXTCHOOSE = 'Choose a level';
+const TEXTRESET = 'Reset Progress';
 
 export default class AsideView{
     elementCreator: ElementCreator;
@@ -102,7 +117,71 @@ class Help {
             classNames: [CssClasses.PROG],
             textContent: TEXT
         };
-
+        const displayparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.DISPLAY],
+            textContent: TEXT
+        };
+        const headparams: ElementsParams ={
+            tag: 'h3',
+            classNames: [CssClasses.SELNAME],
+            textContent: TEXT
+        };
+        const head2params: ElementsParams ={
+            tag: 'h2',
+            classNames: [CssClasses.TITLE],
+            textContent: TEXT
+        };
+        const head3params: ElementsParams ={
+            tag: 'h3',
+            classNames: [CssClasses.SYNTAX],
+            textContent: TEXT
+        };
+        const hintparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.HINT],
+            textContent: TEXT
+        };
+        const head4params: ElementsParams ={
+            tag: 'h4',
+            classNames: [CssClasses.EXAMTITLES],
+            textContent: TEXT
+        };
+        const examparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.EXAM],
+            textContent: TEXT
+        };
+        const levelmenuparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.LEVELMENU],
+            textContent: TEXT
+        };
+        const chooseparams: ElementsParams ={
+            tag: 'h2',
+            classNames: [],
+            textContent: TEXTCHOOSE
+        };
+        const levelsparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.LEVEL],
+            textContent: TEXT
+        };
+        const resetparams: ElementsParams ={
+            tag: 'a',
+            classNames: [CssClasses.RESET],
+            textContent: TEXTRESET
+        };
+        const menuparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.MENUTOGGLEWRAP],
+            textContent: TEXT
+        };
+        const menutgparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.MENUTOGGLE],
+            textContent: TEXT
+        };
 
         const elementCreator = new ElementCreator(params);
 
@@ -128,6 +207,37 @@ class Help {
         elementCreator.addInnerElement(progress.getElement());
         const prog = new ElementCreator(progparams);
         progress.addInnerElement(prog.getElement());
+
+        const display = new ElementCreator(displayparams);
+        elementCreator.addInnerElement(display.getElement());
+        const header1 = new ElementCreator(headparams);
+        display.addInnerElement(header1.getElement());
+        const header2 = new ElementCreator(head2params);
+        display.addInnerElement(header2.getElement());
+        const header3 = new ElementCreator(head3params);
+        display.addInnerElement(header3.getElement());
+        const hint = new ElementCreator(hintparams);
+        display.addInnerElement(hint.getElement());
+        const header4 = new ElementCreator(head4params);
+        display.addInnerElement(header4.getElement());
+        const examples = new ElementCreator(examparams);
+        display.addInnerElement(examples.getElement());
+
+        const levelmenu = new ElementCreator(levelmenuparams);
+        elementCreator.addInnerElement(levelmenu.getElement());
+        const choosetext = new ElementCreator(chooseparams);
+        levelmenu.addInnerElement(choosetext.getElement());
+        const levels = new ElementCreator(levelsparams);
+        levelmenu.addInnerElement(levels.getElement());
+        const reset = new ElementCreator(resetparams);
+        levelmenu.addInnerElement(reset.getElement());
+        const res: HTMLElement = reset.getElement();
+        res.setAttribute("href", "#");
+
+        const menutogglewrap = new ElementCreator(menuparams);
+        elementCreator.addInnerElement(menutogglewrap.getElement());
+        const menutg = new ElementCreator(menutgparams);
+        menutogglewrap.addInnerElement(menutg.getElement());
 
         return elementCreator;
     }

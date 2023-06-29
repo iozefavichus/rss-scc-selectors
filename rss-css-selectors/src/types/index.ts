@@ -16,3 +16,14 @@ export interface ICreator{
     addInnerElement(element: HTMLElement): void,
     createElement(param: ElementsParams): void,
 }
+
+export type Leveltype = {
+    helpTitle : string,
+    selectorName : string,
+    doThis : string,
+    selector : string,
+    syntax : string,
+    help : string,
+    examples : Array<string>,
+    boardMarkup: string
+}
