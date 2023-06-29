@@ -5,6 +5,7 @@ import { ElementsParams } from '../../../../types/index';
 const TEXT = '';
 const TEXTCSS = 'style.css';
 const TEXTHTML = 'table.html';
+const TEXTENTER = 'enter';
 const CssClasses = {
     EDITOR: 'editor',
     PANE: 'editor-pane',
@@ -13,7 +14,10 @@ const CssClasses = {
     INPUT: 'input-header',
     FILE: 'file-name',
     WINDOW: 'file-window',
-    NUMBERS: 'line-numbers'
+    NUMBERS: 'line-numbers',
+    MARKUP: 'markup',
+    STROBE: 'input-strobe',
+    ENTER: 'enter-button',
 };
 
 export default class Editor {
@@ -77,6 +81,16 @@ class EditorPane {
             classNames: [CssClasses.CSS, CssClasses.WINDOW],
             textContent: TEXT
         };
+        const strobeparams: ElementsParams ={
+            tag: 'input',
+            classNames: [CssClasses.STROBE],
+            textContent: TEXT
+        };
+        const enterparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.ENTER],
+            textContent: TEXTENTER
+        };
 
         const elementCreator = new ElementCreator(params);
 
@@ -88,6 +102,10 @@ class EditorPane {
         elementCreator.addInnerElement(window.getElement());
         const numbers = new Numbers();
         window.addInnerElement(numbers.getHtmlElement());
+        const strobe = new ElementCreator(strobeparams);
+        window.addInnerElement(strobe.getElement());
+        const enter = new ElementCreator(enterparams);
+        window.addInnerElement(enter.getElement());
 
         return elementCreator;
     }
@@ -126,6 +144,11 @@ class EditorHtml {
             classNames: [CssClasses.HTML, CssClasses.WINDOW],
             textContent: TEXT
         };
+        const markupparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.MARKUP],
+            textContent: TEXT
+        };
         const elementCreator = new ElementCreator(params);
 
         const input = new ElementCreator(inputparams);
@@ -136,6 +159,8 @@ class EditorHtml {
         elementCreator.addInnerElement(window.getElement());
         const numbers = new Numbers();
         window.addInnerElement(numbers.getHtmlElement());
+        const markup = new ElementCreator(markupparams);
+        window.addInnerElement(markup.getElement());
 
         return elementCreator;
     }

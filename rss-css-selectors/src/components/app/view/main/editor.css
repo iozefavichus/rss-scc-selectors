@@ -79,6 +79,12 @@
   background: rgba(0,0,0,.3);
 }
 
+.markup {
+    line-height: 150%;
+    font-family: menlo;
+    z-index: 1;
+  }
+
 .editor input {
   font-family: menlo, monospace;
   color: #333;
@@ -89,7 +95,41 @@
 
 .editor input.input-strobe {
   background: rgba(62,203,255,.3);
-  /* -webkit-animation: input .5s infinite;
-  -moz-animation: input .5s infinite; */
-
+  -webkit-animation: input .5s infinite;
+  -moz-animation: input .5s infinite;
 }
+
+@keyframes strobe {
+    0% { transform:   skew(4deg,0deg) scaleX(1); }
+    10% { transform:  skew(1deg,0deg) scaleY(.9) ; }
+    50% { transform:  skew(-4deg,0deg) scaleX(1); }
+    60% { transform:  skew(-1deg,0deg) scaleY(.9) ; }
+    100% {transform: skew(4deg,0deg) scaleX(1); }
+  }
+
+@keyframes input {
+  50% { background:none ; }
+}
+
+.editor input:focus {
+  outline: none;
+  border-color: #555;
+}
+
+.enter-button {
+    background: #ddd;
+    display: block;
+    border-radius: 2px;
+    padding: 2px 7px 2px 7px;
+    color: #666;
+    border: solid 3px #999;
+    border-width: 1px 1px 6px 1px;
+    position: absolute;
+    right: 13px;
+    font-size: 9px;
+    position: absolute;
+    cursor: pointer;
+    top: 7px;
+    right: 7px;
+    z-index: 999999;
+  }
