@@ -4,6 +4,7 @@ import { ElementsParams } from '../../../../types/index';
 
 const TEXT = '';
 const TEXTCSS = 'style.css';
+const TEXTHTML = 'table.html';
 const CssClasses = {
     EDITOR: 'editor',
     PANE: 'editor-pane',
@@ -12,6 +13,7 @@ const CssClasses = {
     INPUT: 'input-header',
     FILE: 'file-name',
     WINDOW: 'file-window',
+    NUMBERS: 'line-numbers'
 };
 
 export default class Editor {
@@ -42,7 +44,7 @@ export default class Editor {
     }
 }
 
-export class EditorPane {
+class EditorPane {
     elementCreator: ElementCreator;
 
     constructor() {
@@ -63,7 +65,7 @@ export class EditorPane {
         const inputparams: ElementsParams ={
             tag: 'div',
             classNames: [CssClasses.INPUT],
-            textContent: TEXT
+            textContent: 'CSS Editor',
         };
         const fileparams: ElementsParams ={
             tag: 'div',
@@ -73,7 +75,7 @@ export class EditorPane {
         const windowparams: ElementsParams ={
             tag: 'div',
             classNames: [CssClasses.CSS, CssClasses.WINDOW],
-            textContent: TEXTCSS
+            textContent: TEXT
         };
 
         const elementCreator = new ElementCreator(params);
@@ -82,15 +84,16 @@ export class EditorPane {
         elementCreator.addInnerElement(input.getElement());
         const file = new ElementCreator(fileparams);
         input.addInnerElement(file.getElement());
-        input.setTextcontent('CSS Editor');
         const window = new ElementCreator(windowparams);
         elementCreator.addInnerElement(window.getElement());
+        const numbers = new Numbers();
+        window.addInnerElement(numbers.getHtmlElement());
 
         return elementCreator;
     }
 }
 
-export class EditorHtml {
+class EditorHtml {
     elementCreator: ElementCreator;
 
     constructor() {
@@ -111,13 +114,55 @@ export class EditorHtml {
         const inputparams: ElementsParams ={
             tag: 'div',
             classNames: [CssClasses.INPUT],
+            textContent: 'HTML Viewer',
+        };
+        const fileparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.FILE],
+            textContent: TEXTHTML
+        };
+        const windowparams: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.HTML, CssClasses.WINDOW],
             textContent: TEXT
         };
         const elementCreator = new ElementCreator(params);
 
         const input = new ElementCreator(inputparams);
         elementCreator.addInnerElement(input.getElement());
+        const file = new ElementCreator(fileparams);
+        input.addInnerElement(file.getElement());
+        const window = new ElementCreator(windowparams);
+        elementCreator.addInnerElement(window.getElement());
+        const numbers = new Numbers();
+        window.addInnerElement(numbers.getHtmlElement());
 
         return elementCreator;
     }
+}
+
+class Numbers {
+    elementCreator: ElementCreator;
+
+    constructor() {
+        this.elementCreator = this.createView();
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getHtmlElement(): any {
+        return this.elementCreator.getElement();
+    }
+
+    createView() {
+        const params: ElementsParams ={
+            tag: 'div',
+            classNames: [CssClasses.NUMBERS],
+            textContent: TEXT
+        };
+
+        const elementCreator = new ElementCreator(params);
+        elementCreator.addInnerHTML('1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20');
+        return elementCreator;
+    }
+
 }

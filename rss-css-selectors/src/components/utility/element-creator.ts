@@ -21,6 +21,11 @@ export default class ElementCreator{
             this.element?.append(element);
         }
     }
+    addInnerHTML(text: string){
+        if(this.element){
+            this.element.innerHTML = text;
+        }
+    }
 
     createElement(param: ElementsParams){
         this.element = document.createElement(param.tag);
