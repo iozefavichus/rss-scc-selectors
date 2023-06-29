@@ -9,7 +9,8 @@ export default class ElementCreator{
         this.createElement(param);
     }
 
-    getElement(): HTMLElement | null{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    getElement(): any {
         return this.element;
     }
 

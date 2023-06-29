@@ -1,5 +1,4 @@
-// import View from '../../view/view';
-// import { ViewParams } from '../../../../types/index';
+
 import './main.css';
 import ElementCreator from '../../../utility/element-creator';
 import { ElementsParams } from '../../../../types/index';
@@ -44,10 +43,13 @@ export default class MainView{
         elementCreator.addInnerElement(header.getHtmlElement());
         elementCreator.addInnerElement(order.getHtmlElement());
         elementCreator.addInnerElement(note.getHtmlElement());
+
         const help: HTMLElement = note.getHtmlElement();
         help.setAttribute("href", "#");
+
         elementCreator.addInnerElement(game.getHtmlElement());
         elementCreator.addInnerElement(editor.getHtmlElement());
+
         elementCreator.addInnerElement(footer.getHtmlElement());
 
         return elementCreator;
