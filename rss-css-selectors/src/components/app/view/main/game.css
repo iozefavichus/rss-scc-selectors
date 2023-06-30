@@ -75,3 +75,200 @@
     position: relative;
     margin: 10px auto 0 auto;
 }
+
+apple {
+  background: #e41919;
+  border-color: #ab1212;
+}
+
+orange {
+  background: orange;
+  border-color: #bd6e07;
+}
+
+orange,apple,pickle {
+  box-shadow: 0px 5px 0px rgba(0,0,0,.2);
+  display: inline-block;
+  margin: 0 10px;
+  height: 60px;
+}
+
+
+
+carrot {
+  background: orange;
+  width: 60px;
+  height: 60px;
+  display: inline-block;
+  box-shadow: 0px 5px 0px rgba(0,0,0,.15);
+
+  background: #f9e4ac;
+  border-style: solid;
+  border-color: #88611e;
+  border-width: 2px 2px 12px 2px;
+  -webkit-border-radius: 15px 15px 6px 6px;
+  border-radius: 15px 15px 6px 6px;
+  margin: 20px 10px;
+}
+
+
+orange,apple {
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+  border-style: solid;
+  border-width: 2px 4px 15px 4px;
+  height: 60px;
+  width: 60px;
+  position: relative;
+  margin: 20px 10px;
+}
+
+orange.small,
+apple.small {
+  height: 30px;
+  width: 30px;
+  border-width: 2px 4px 8px 4px;
+  margin: 30px 10px;
+}
+
+pickle {
+  background: #179837;
+  width: 25px;
+  border-radius: 30px;
+  display: inline-block;
+  position: relative;
+  border: solid 2px #025a18;
+  border-width: 2px 2px 9px 2px;
+  margin: 20px 10px;
+}
+
+pickle.small {
+  height: 40px;
+  width: 18px;
+  border-width: 1px 2px 6px 2px;
+  margin: 30px 10px;
+}
+
+orange:before,apple:before {
+  content: "";
+  display: block;
+  position: absolute;
+  background: rgba(255,255,255,.3);
+  height: 30%;
+  width: 30%;
+  top: 0px;
+  left: calc(50% - 15%);
+  border-radius: 100px;
+}
+
+/*FRUITS ON A PLATTER*/
+
+bento orange,
+bento apple,
+plate orange,
+plate apple
+ {
+  left: calc(50% - 30px);
+  margin: 0;
+  position: absolute;
+}
+
+plate > apple:last-child,
+plate > orange:last-child,
+bento > apple:last-child,
+bento > orange:last-child
+{
+  top: calc(50% - 35px);
+}
+
+plate .small,
+bento .small {
+  left: calc(50% - 15px);
+  margin-left:0;
+  margin-right:0;
+}
+
+plate > .small:only-child,
+bento > .small:only-child {
+  position: absolute;
+  top: calc(50% - 15px);
+  margin:0;
+}
+
+plate > pickle:only-child,
+bento > pickle:only-child {
+  top: calc(50% - 40px);
+  left: calc(50% - 10px);
+  z-index: 99999;
+  margin: 0;
+  position: absolute;
+}
+
+plate > pickle.small:only-child,
+bento > pickle.small:only-child {
+  top: calc(50% - 22px);
+  left: calc(50% - 8px);
+  z-index: 99999;
+}
+
+
+plate apple,
+plate orange {
+  position: absolute;
+}
+
+plate apple:last-child,
+plate orange:last-child {
+  z-index: 300;
+}
+
+plate apple:nth-last-child(2),
+plate orange:nth-last-child(2) {
+  top: -25px;
+  z-index: 400;
+}
+
+plate apple:nth-last-child(3),
+plate orange:nth-last-child(3)
+{
+  top: -65px;
+  z-index: 500;
+}
+
+plate apple:nth-last-child(4),
+plate orange:nth-last-child(4)
+{
+  top: -105px;
+  z-index: 600;
+}
+
+plate:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: calc(50% - 32px);
+  top: calc(50% - 32px);
+  height: 65px;
+  width: 65px;
+  border-radius: 60px;
+  border-top: solid 6px #CCC;
+  opacity: .4;
+  background: rgba(255,255,255,1);
+}
+
+#fancy:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: calc(50% - 47px);
+  top: calc(50% - 44px);
+  height: 68px;
+  width: 74px;
+  border-radius: 60px;
+  border: solid 10px #009ff2;
+  opacity: .4;
+}
+
+orange {
+  z-index: 1000;
+}
