@@ -2,7 +2,7 @@ import './main.css';
 import ElementCreator from '../../../utility/element-creator';
 import { ElementsParams } from '../../../../types/index';
 
-const TEXT = 'Select the plates';
+const TEXT = '';
 const CssClasses = {
     ORDER: 'order',
 };

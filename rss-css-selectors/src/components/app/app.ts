@@ -1,6 +1,7 @@
 import './style.css';
 import AsideView from './view/aside/aside';
 import MainView from './view/main/main';
+import { loadLevel } from '../app/logics';
 
 export default class App {
     constructor() {
@@ -14,5 +15,7 @@ export default class App {
 
         document.body.append(main.getHtmlElement());
         document.body.append(aside.getHtmlElement());
+        loadLevel();
     }
 }
+

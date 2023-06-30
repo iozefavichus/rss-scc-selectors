@@ -1,7 +1,8 @@
-// import { Leveltype } from '../../../src/types/index';
+import { Leveltype } from '../../../src/types/index';
+import { levels } from './levels';
 
-// let level: Leveltype;
-// let currentLevel =  0;
+let level: Leveltype;
+let currentLevel =  0;
 // const levelTimeout = 1000;
 // let finished = false;
 // const blankProgress = {
@@ -11,16 +12,17 @@
 //     guessHistory : {}
 //   }
 
-// function loadLevel(){
 
-//   if(currentLevel < 0 || currentLevel >= levels.length) {
-//     currentLevel = 0;
-//   }
+export function loadLevel(){
+
+  if(currentLevel < 0 || currentLevel >= levels.length) {
+    currentLevel = 0;
+  }
 
 //   hideTooltip();
 
-//   level = levels[currentLevel];
-
+  level = levels[currentLevel];
+  console.log(level);
 //   // Show the help link only for the first three levels
 //   if(currentLevel < 3) {
 //     document.querySelector(".note-toggle").show();
@@ -31,10 +33,10 @@
 //   $(".level-menu .current").removeClass("current");
 //   $(".level-menu div a").eq(currentLevel).addClass("current");
 
-//   var percent = (currentLevel+1)/levels.length * 100;
+//   let percent = (currentLevel + 1)/levels.length * 100;
 //   $(".progress").css("width",percent + "%");
 
-//   localStorage.setItem("currentLevel",currentLevel);
+    //   localStorage.setItem("currentLevel", currentLevel.toString());
 
 //   loadBoard();
 //   resetTable();
@@ -43,7 +45,13 @@
 
 //   updateProgressUI(currentLevel, checkCompleted(currentLevel));
 
-//   $(".order").text(level.doThis);
+     const letfs = document.querySelector(".order");
+     console.log(`hello  ${letfs}`);
+     if(letfs){
+        letfs.innerHTML = level.doThis
+        console.log('dsa');
+    };
+//
 //   $("input").val("").focus();
 
 //   $(".input-wrapper").css("opacity",1);
@@ -55,4 +63,4 @@
 //     $(".pop").removeClass("pop");
 //   },200);
 
-// }
+}
