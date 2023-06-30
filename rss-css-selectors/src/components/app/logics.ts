@@ -1,17 +1,26 @@
 import { Leveltype } from '../../../src/types/index';
 import { levels } from './levels';
+import ElementCreator from '../../components/utility/element-creator';
+import { ElementsParams } from '../../types/index';
+
+const CssClasses = {
+    EXAMPLES: 'example',
+}
 
 let level: Leveltype;
 let currentLevel =  0;
 // const levelTimeout = 1000;
-// let finished = false;
+// const finished = false;
 // const blankProgress = {
 //     totalCorrect : 0,
 //     percentComplete : 0,
 //     lastPercentEvent : 0,
 //     guessHistory : {}
 //   }
+// export {level, finished, currentLevel};
 
+// const progress = JSON.parse(localStorage.getItem("progress") || '') || blankProgress;
+// console.log(progress);
 
 export function loadLevel(){
 
@@ -22,7 +31,6 @@ export function loadLevel(){
 //   hideTooltip();
 
   level = levels[currentLevel];
-  console.log(level);
 
 
 //   if(currentLevel < 3) {
@@ -59,9 +67,9 @@ export function loadLevel(){
    };
 
     loadBoard();
-//   resetTable();
+    resetTable();
 
-//   updateProgressUI(currentLevel, checkCompleted(currentLevel));
+    // updateProgressUI(currentLevel, checkCompleted(currentLevel));
 
 //
 //   $("input").val("").focus();
@@ -126,26 +134,27 @@ function loadBoard(){
         nametags.remove();
     }
 
-    const table = document.querySelector(".table-wrapper");
-    if(table){
-        table.setAttribute("style", "transform: rotateX(0)");
+    const tablewrap = document.querySelector(".table-wrapper");
+    if(tablewrap){
+        tablewrap.setAttribute("style", "transform: rotateX(0)");
     }
 //   $(".table-wrapper").width($(".table-wrapper").width());
 
+    const table = document.querySelectorAll(".table *");
+        table.forEach(() => {
+            // if($(this).attr("for")){
+                //       var pos = $(this).position();
+                //       var width = $(this).width();
+                //       var nameTag = $("<div class='nametag'>" + $(this).attr("for") + "</div>");
+                //       $(".nametags").append(nameTag);
+                //       var tagPos = pos.left + (width/2) - nameTag.width()/2 + 12;
+                //       nameTag.css("left",tagPos);
+                //     }
+        });
 
-//   $(".table *").each(function(){
-//     if($(this).attr("for")){
-//       var pos = $(this).position();
-//       var width = $(this).width();
-//       var nameTag = $("<div class='nametag'>" + $(this).attr("for") + "</div>");
-//       $(".nametags").append(nameTag);
-//       var tagPos = pos.left + (width/2) - nameTag.width()/2 + 12;
-//       nameTag.css("left",tagPos);
-//     }
-//   });
 
-    if(table){
-        table.setAttribute("style", "transform: rotateX(20deg)");
+    if(tablewrap){
+        tablewrap.setAttribute("style", "transform: rotateX(20deg)");
     }
 }
 
@@ -153,18 +162,20 @@ function showHelp() {
 
   const helpTitle = level.helpTitle || "";
   const help = level.help || "";
-//   const examples = level.examples ||[];
+  const examples = level.examples ||[];
   const selector = level.selector || "";
   const syntax = level.syntax || "";
 //   const syntaxExample = level.syntaxExample || "";
   const selectorName = level.selectorName || "";
 
   const displaysyntax = document.querySelector(".display-help .syntax");
-  if(displaysyntax){
-    displaysyntax.innerHTML = syntax;
+    if(displaysyntax){
+      displaysyntax.innerHTML = syntax;
 };
-
-//   $(".display-help .syntax-example").html(syntaxExample);
+//   const displaysyntaxhelp = document.querySelector(".display-help .syntax-example");
+//     if(displaysyntaxhelp){
+//       displaysyntaxhelp.innerHTML = syntaxExample;
+// };
 
   const displayselector = document.querySelector(".display-help .selector-name");
   if(displayselector){
@@ -183,16 +194,22 @@ function showHelp() {
 
   const displayexamplestitles = document.querySelector(".display-help .examples-title");
     if(displayexamplestitles){
-        displayexamplestitles.innerHTML = '';
+        displayexamplestitles?.setAttribute("style","display: none")
 };
 
-//   $(".display-help .examples-title").hide(); // Hide the "Examples" heading
-
-//   for(var i = 0; i < examples.length; i++){
-//     var example = $("<div class='example'>" + examples[i] + "</div>");
-//     $(".display-help .examples").append(example);
-//     $(".display-help .examples-title").show(); // Show it if there are examples
-//   }
+  for(let i = 0; i < examples.length; i++){
+    const examparams: ElementsParams ={
+        tag: 'div',
+        classNames: [CssClasses .EXAMPLES],
+        textContent: ''
+    };
+    const element = new ElementCreator(examparams);
+    const exam = document.querySelector(".display-help .examples");
+    exam?.append(element.getElement());
+    element.addInnerHTML(examples[i]);
+    const examtitles = document.querySelector(".display-help .examples-title");
+    examtitles?.setAttribute("style","display: block");
+  }
 
 
 const displayhint = document.querySelector(".display-help .hint");
@@ -205,3 +222,81 @@ const displaysel = document.querySelector(".display-help .selector");
         displaysel.innerHTML = selector;
 };
 }
+
+function resetTable(){
+    const displayhelp = document.querySelector(".display-help");
+    displayhelp?.classList.remove("open-help");
+
+    const clean = document.querySelector(".clean,.strobe");
+    clean?.classList.remove("clean,strobe");
+
+    const strobe = document.querySelector("input");
+    strobe?.classList.add("input-strobe");
+
+    const table = document.querySelectorAll(".table *");
+    table.forEach(() => {
+        // (this).width($(this).width());
+    });
+
+    const tableWidth = document.querySelector(".table");
+    tableWidth?.setAttribute("style","outerWidth:''");
+    const tableedge = document.querySelector(".table-wrapper, .table-edge");
+    tableedge?.setAttribute("style", "width: ${tableWidth}")
+  }
+
+//  export function checkCompleted(levelNumber: number){
+    // if(progress.guessHistory[levelNumber]){
+    //   if(progress.guessHistory[levelNumber].correct){
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // } else {
+    //   return false;
+    // }
+//   }
+
+//   function updateProgressUI(levelNumber: number, completed: boolean){
+//     if(completed) {
+//       const levelnumb = document.querySelector(".levels a:nth-child("+ (levelNumber+1) + ")");
+//       levelnumb?.classList.add("completed");
+//       const compl = document.querySelector(".level-header");
+//       compl?.classList.add("completed");
+//     } else {
+//       const compl = document.querySelector(".level-header");
+//       compl?.classList.remove("completed");
+//     }
+//   }
+
+export function buildLevelmenu(){
+    for(let i = 0; i < levels.length; i++){
+      const level = levels[i];
+      const item = document.createElement("a");
+
+      item.innerHTML ="<span class='checkmark'></span><span class='level-number'>" + (i+1) + "</span>" + level.syntax;
+      const levelmenu = document.querySelector(".level-menu .levels");
+      levelmenu?.append(item);
+
+    //   if(checkCompleted(i)){
+    //     item.classList.add("completed");
+    //   }
+
+      item.addEventListener("click", function(){
+        // finished = false;
+        // currentLevel = $(this).index();
+        loadLevel(),
+        closeMenu();
+      }
+    )};
+}
+
+
+  export function closeMenu(){
+    const close = document.querySelector(".right-col");
+    close?.classList.remove("menu-open");
+  }
+
+  export function openMenu(){
+    const open = document.querySelector(".right-col");
+    open?.classList.add("menu-open");
+  }

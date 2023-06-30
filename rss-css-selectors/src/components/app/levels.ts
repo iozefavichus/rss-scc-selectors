@@ -31,5 +31,41 @@ export const levels = [
     <plate/>
     <bento/>
     `
+  },
+  {
+    helpTitle: "Select elements with an ID",
+    selectorName: "ID Selector",
+    doThis : "Select the fancy plate",
+    selector : "#fancy",
+    syntax: "#id",
+    help : 'Selects the element with a specific <strong>id</strong>. You can also combine the ID selector with the type selector.',
+    examples : [
+      '<strong>#cool</strong> selects any element with <strong>id="cool"</strong>',
+      '<strong>ul#long</strong> selects <tag>ul id="long"</tag>'
+    ],
+    boardMarkup : `
+    <plate id="fancy"/>
+    <plate/>
+    <bento/>
+    `
+  },
+  {
+    helpTitle: "Select an element inside another element",
+    selectorName : "Descendant Selector",
+    doThis : "Select the apple on the plate",
+    selector : "plate apple",
+    syntax: "A&nbsp;&nbsp;B",
+    help : "Selects all <strong>B</strong> inside of <strong>A</strong>. <strong>B</strong> is called a descendant because it is inside of another element.",
+    examples : [
+      '<strong>p&nbsp;&nbsp;strong</strong> selects all <tag>strong</tag> elements that are inside of any <tag>p</tag>',
+      '<strong>#fancy&nbsp;&nbsp;span</strong> selects any <tag>span</tag> elements that are inside of the element with <strong>id="fancy"</strong>',
+    ],
+    boardMarkup : `
+    <bento/>
+    <plate>
+      <apple/>
+    </plate>
+    <apple/>
+    `
   }
 ]
