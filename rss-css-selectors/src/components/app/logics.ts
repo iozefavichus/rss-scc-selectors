@@ -9,7 +9,7 @@ const CssClasses = {
 };
 
 let level: Leveltype;
-let currentLevel = 0;
+let currentLevel = parseInt(localStorage.currentLevel,10) || 2;
 // const levelTimeout = 1000;
 // let finished = false;
 // const blankProgress = {
@@ -505,6 +505,15 @@ function hideTooltip(){
 //     return(document.querySelector(".table") == ruleTable);
 //   }
 
+function addAnimation(el: HTMLElement|null){
+    if(el){
+        el.classList.add("link-jiggle");
+        el.addEventListener("animationend",function(){
+          el.classList.remove("link-jiggle");
+        })
+    }
+  }
+
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector(".level-menu-toggle-wrapper")?.addEventListener("click",function(){
         if(!document.querySelector(".menu-open")) {
@@ -513,5 +522,25 @@ document.addEventListener('DOMContentLoaded', function () {
           closeMenu();
         }
       });
+
+      document.querySelector(".next")?.addEventListener("click", function(){
+        addAnimation(document.querySelector(".level-nav"));
+        currentLevel++;
+            if(currentLevel >= levels.length) {
+                currentLevel = levels.length - 1;
+            }
+            loadLevel();
+            return false;
+      })
+      document.querySelector(".previous")?.addEventListener("click", function(){
+        addAnimation(document.querySelector(".level-nav"));
+        currentLevel--;
+            if(currentLevel < 0) {
+                currentLevel = 0;
+            }
+            loadLevel();
+            return false;
+      })
+
 })
 

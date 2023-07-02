@@ -72,3 +72,19 @@
     position: relative;
     top: 10px;
   }
+@keyframes linkJiggle {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scaleX(.87) scaleY(.8);
+
+  }
+  40% {
+    transform: scale(1.13);
+  }
+
+}
+.level-nav a.link-jiggle {
+    animation: linkJiggle .2s ease-out;
+  }
