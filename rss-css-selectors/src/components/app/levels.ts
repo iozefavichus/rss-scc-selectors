@@ -13,7 +13,8 @@ export const levels = [
       boardMarkup: `
       <plate/>
       <plate/>
-      `
+      `,
+      width: 242,
     },
   {
     helpTitle : "Select elements by their type",
@@ -30,7 +31,8 @@ export const levels = [
     <bento/>
     <plate/>
     <bento/>
-    `
+    `,
+    width: 367,
   },
   {
     helpTitle: "Select elements with an ID",
@@ -47,7 +49,8 @@ export const levels = [
     <plate id="fancy"/>
     <plate/>
     <bento/>
-    `
+    `,
+    width: 367,
   },
   {
     helpTitle: "Select an element inside another element",
@@ -66,7 +69,8 @@ export const levels = [
       <apple/>
     </plate>
     <apple/>
-    `
+    `,
+    width: 327,
   },
   {
     helpTitle: "Combine the Descendant & ID Selectors",
@@ -88,7 +92,8 @@ export const levels = [
     <plate>
       <pickle/>
     </plate>
-    `
+    `,
+    width: 367,
   },
   {
     helpTitle: "Select elements by their class",
@@ -107,7 +112,8 @@ export const levels = [
       <apple class="small"/>
     </plate>
     <plate/>
-    `
+    `,
+    width: 380,
   },
   {
     helpTitle: "Combine the Class Selector",
@@ -131,7 +137,8 @@ export const levels = [
     </plate>
     <plate>
       <orange class="small"/>
-    </plate>`
+    </plate>`,
+    width: 504,
   },
   {
     helpTitle: "You can do it...",
@@ -155,6 +162,7 @@ export const levels = [
     <bento>
       <orange class="small"/>
     </bento>
-    `
+    `,
+    width: 544,
   }
 ]

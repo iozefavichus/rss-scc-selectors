@@ -223,24 +223,15 @@ function showHelp() {
 }
 
 function resetTable() {
-    const displayhelp = document.querySelector('.display-help');
-    displayhelp?.classList.remove('open-help');
+    console.log(level.width);
+    document.querySelector('.display-help')?.classList.remove('open-help');
+    document.querySelector('.clean,.strobe')?.classList.remove('clean,strobe');
+    document.querySelector('input')?.classList.add('input-strobe');
+    document.querySelector('.table-surface')?.setAttribute("style",`width: ${level.width}px`);
 
-    const clean = document.querySelector('.clean,.strobe');
-    clean?.classList.remove('clean,strobe');
-
-    const strobe = document.querySelector('input');
-    strobe?.classList.add('input-strobe');
-
-    const table = document.querySelectorAll('.table *');
-    table.forEach(() => {
-        // (this).width($(this).width());
-    });
-
-    const tableWidth = document.querySelector('.table');
-    tableWidth?.setAttribute('style', "outerWidth:''");
-    const tableedge = document.querySelector('.table-wrapper, .table-edge');
-    tableedge?.setAttribute('style', 'width: ${tableWidth}');
+    // document.querySelector('.table')?.setAttribute('style', "outerWidth:''");
+    document.querySelector('.table-wrapper')?.setAttribute('style', `width: ${level.width}px`);
+    document.querySelector('.table-edge')?.setAttribute('style', `width: ${level.width}px`);
 }
 
 //  export function checkCompleted(levelNumber: number){
@@ -297,6 +288,7 @@ function getMarkup(el: Element) {
     // const elName = el.tagName.toLowerCase();
     const wrapperEl = document.createElement('div');
     console.log(el);
+    // return el;
     // const attributeString = '';
 
     // this.forEach( el.attributes, function () {

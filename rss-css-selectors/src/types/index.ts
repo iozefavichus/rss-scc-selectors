@@ -25,5 +25,6 @@ export type Leveltype = {
     syntax : string,
     help : string,
     examples : Array<string>,
-    boardMarkup: string
+    boardMarkup: string,
+    width: number
 }
