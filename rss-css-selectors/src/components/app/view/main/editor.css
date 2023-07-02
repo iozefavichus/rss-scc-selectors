@@ -95,8 +95,8 @@
 
 .editor input.input-strobe {
   background: rgba(62,203,255,.3);
-  -webkit-animation: input .5s infinite;
-  -moz-animation: input .5s infinite;
+  /* -webkit-animation: input .5s infinite;
+  -moz-animation: input .5s infinite; */
 }
 
 @keyframes strobe {

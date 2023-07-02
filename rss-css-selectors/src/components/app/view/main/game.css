@@ -272,3 +272,22 @@ plate:before {
 orange {
   z-index: 1000;
 }
+
+.pop {
+  animation: pop .2s;
+}
+
+@keyframes pop {
+  0% {
+    opacity: 0;
+    transform: scale(.3);
+    transform-origin: center;
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

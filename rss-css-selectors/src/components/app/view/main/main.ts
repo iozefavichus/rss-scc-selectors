@@ -8,9 +8,11 @@ import Order from '../main/order';
 import Note from '../main/note';
 import Game from '../main/game';
 import Editor from './editor';
+import Scroll from './scrollbar';
 
 const CssClasses = {
     MAIN: 'main',
+    SCROLL: 'scrollbar'
 };
 const TEXT = '';
 
@@ -33,6 +35,7 @@ export default class MainView{
         const footer = new FooterView();
         const game = new Game();
         const editor = new Editor();
+        const scrollbar = new Scroll();
         const params: ElementsParams ={
             tag: 'main',
             classNames: [CssClasses.MAIN],
@@ -51,11 +54,9 @@ export default class MainView{
         elementCreator.addInnerElement(editor.getHtmlElement());
 
         elementCreator.addInnerElement(footer.getHtmlElement());
+        elementCreator.addInnerElement(scrollbar.getHtmlElement());
 
         return elementCreator;
     }
 
 }
-
-
-
