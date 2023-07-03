@@ -1,4 +1,3 @@
-// import View from '../view';
 import './aside.css';
 import ElementCreator from '../../../utility/element-creator';
 import { ElementsParams } from '../../../../types/index';
@@ -39,8 +38,7 @@ export default class AsideView{
         this.elementCreator = this.createView();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getHtmlElement(): any {
+    getHtmlElement(): HTMLElement {
         return this.elementCreator.getElement();
     }
 
@@ -66,8 +64,7 @@ class Help {
         this.elementCreator = this.createView();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getHtmlElement(): any {
+    getHtmlElement(): HTMLElement {
         return this.elementCreator.getElement();
     }
 

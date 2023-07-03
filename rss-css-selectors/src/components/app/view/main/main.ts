@@ -1,4 +1,3 @@
-
 import './main.css';
 import ElementCreator from '../../../utility/element-creator';
 import { ElementsParams } from '../../../../types/index';
@@ -23,8 +22,7 @@ export default class MainView{
         this.elementCreator = this.createView();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getHtmlElement(): any {
+    getHtmlElement(): HTMLElement {
         return this.elementCreator.getElement();
     }
 

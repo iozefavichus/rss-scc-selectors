@@ -11,7 +11,6 @@ const CssClasses = {
 let level: Leveltype;
 let currentLevel = parseInt(localStorage.currentLevel,10) || 0;
 const levelTimeout = 1000;
-// let finished = false;
 const blankProgress = {
     totalCorrect : 0,
     percentComplete : 0,
@@ -142,11 +141,6 @@ function addNametags() {
               const pos = el.getAttribute('position');
               const width = el.getAttribute('width');
               console.log(pos, width)
-            //   const nameTag: HTMLElement;
-            //   nameTag.innerHTML = "<div class='nametag'>" + el.setAttribute("for") + "</div>";
-            //   document.querySelector(".nametags")?.append(nameTag);
-            //   const tagPos = pos.left + (width/2) - nameTag.width()/2 + 12;
-            //   nameTag.setAttribute("style",`left:${tagPos}`);
             }
     });
 
@@ -161,17 +155,12 @@ function showHelp() {
     const examples = level.examples || [];
     const selector = level.selector || '';
     const syntax = level.syntax || '';
-    //   const syntaxExample = level.syntaxExample || "";
     const selectorName = level.selectorName || '';
 
     const displaysyntax = document.querySelector('.display-help .syntax');
     if (displaysyntax) {
         displaysyntax.innerHTML = syntax;
     }
-    //   const displaysyntaxhelp = document.querySelector(".display-help .syntax-example");
-    //     if(displaysyntaxhelp){
-    //       displaysyntaxhelp.innerHTML = syntaxExample;
-    // };
 
     const displayselector = document.querySelector(
         '.display-help .selector-name'
@@ -223,13 +212,10 @@ function showHelp() {
 }
 
 function resetTable() {
-    // console.log(level.width);
     document.querySelector('.display-help')?.classList.remove('open-help');
     document.querySelector('.clean,.strobe')?.classList.remove('clean,strobe');
     document.querySelector('input')?.classList.add('input-strobe');
     document.querySelector('.table-surface')?.setAttribute("style",`width: ${level.width}px`);
-
-    // document.querySelector('.table')?.setAttribute('style', "outerWidth:''");
     document.querySelector('.table-wrapper')?.setAttribute('style', `width: ${level.width}px`);
     document.querySelector('.table-edge')?.setAttribute('style', `width: ${level.width}px`);
 }
@@ -282,43 +268,6 @@ export function buildLevelmenu() {
     }
 }
 
-// function getMarkup(el: Element) {
-//     // const hasChildren = el.children.length > 0 ? true : false;
-//     // const elName = el.tagName.toLowerCase();
-//     const wrapperEl = document.createElement('div');
-//     console.log('element',el);
-//     // return el;
-//     // const attributeString = '';
-
-//     // this.forEach( el.attributes, function () {
-//     //     if (this.specified) {
-//     //         attributeString =
-//     //             attributeString + ' ' + this.name + '="' + this.value + '"';
-//     //     }
-//     // });
-//     // let attributeSpace = '';
-//     // if (attributeString.length > 0) {
-//     //     attributeSpace = ' ';
-//     // }
-//     // if (hasChildren) {
-//     //     wrapperEl.innerText =
-//     //         '<' + elName + attributeSpace + attributeString + '>';
-
-//     //      for (let i = 0; i < el.children.length;  i += 1) {
-//     //         wrapperEl.append(getMarkup(el));
-//     //      }
-//     //     const array = Array.from(el.children);
-//     //     array.forEach((el: Element) => {
-//     //         wrapperEl.append(getMarkup(el));
-//     //     });
-//     //     wrapperEl.append('&lt;/' + elName + '&gt;');
-//     // } else {
-//     //     wrapperEl.innerText =
-//     //         '<' + elName + attributeSpace + attributeString + ' />';
-//     // }
-//     return wrapperEl;
-// }
-
 function enterHit() {
     const enter = document.querySelector('.enter-button');
     enter?.classList.remove('enterhit');
@@ -362,7 +311,6 @@ function fireRule(rule: string) {
     ruleSelected?.classList.remove("strobe");
     ruleSelected?.classList.add("clean");
     document.getElementsByTagName("input")[0].value = '';
-    // document.querySelector("input")?.setAttribute();
 
     const wrap = document.querySelector(".input-wrapper");
     wrap?.setAttribute("style", "opacity: 0.2");

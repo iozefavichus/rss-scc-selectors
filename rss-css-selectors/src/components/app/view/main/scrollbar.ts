@@ -9,15 +9,12 @@ const CssClasses = {
 
 export default class Scroll{
     elementCreator: ElementCreator;
-    // viewport: Element;
 
     constructor() {
-        // this.viewport = container.querySelector('.viewport');
         this.elementCreator = this.createView();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getHtmlElement(): any {
+    getHtmlElement(): HTMLElement {
         return this.elementCreator.getElement();
     }
 

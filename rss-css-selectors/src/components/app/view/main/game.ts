@@ -20,8 +20,7 @@ export default class Game {
         this.elementCreator = this.createView();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getHtmlElement(): any {
+    getHtmlElement(): HTMLElement {
         return this.elementCreator.getElement();
     }
 
@@ -95,8 +94,7 @@ class Edge {
         this.elementCreator = this.createView();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getHtmlElement(): any {
+    getHtmlElement(): HTMLElement {
         return this.elementCreator.getElement();
     }
 
@@ -117,7 +115,6 @@ class Edge {
         const secondleg = new ElementCreator(legparams);
         elementCreator.addInnerElement(leg.getElement());
         elementCreator.addInnerElement(secondleg.getElement());
-
 
         return elementCreator;
     }

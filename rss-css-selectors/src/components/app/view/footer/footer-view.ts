@@ -1,6 +1,5 @@
 import './footer.css';
 import ElementCreator from '../../../utility/element-creator';
-// import View from '../view';
 import { ElementsParams } from '../../../../types/index';
 
 const CssClasses = {
@@ -19,8 +18,7 @@ export default class FooterView{
         this.elementCreator = this.createView();
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getHtmlElement(): any {
+    getHtmlElement(): HTMLElement {
         return this.elementCreator.getElement();
     }
 

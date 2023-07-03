@@ -14,7 +14,7 @@ export default class ElementCreator{
         return this.element;
     }
 
-    addInnerElement(element: ElementCreator | HTMLElement) {
+    addInnerElement(element: HTMLElement) {
         if (element instanceof ElementCreator) {
             // this.element?.append(element.getElement());
         } else {
@@ -31,7 +31,6 @@ export default class ElementCreator{
         this.element = document.createElement(param.tag);
         this.setCssClasses(param.classNames);
         this.setTextcontent(param.textContent);
-        // this.setCallback(param.callback);
     }
 
     setCssClasses(cssClasses: string[]){
@@ -42,9 +41,4 @@ export default class ElementCreator{
             this.element.textContent = text;
         }
     }
-    // setCallback(callback: () => void){
-    //     if(this.element){
-    //         this.element.addEventListener('click', (event) => callback(event))
-    //     }
-    // }
 }
