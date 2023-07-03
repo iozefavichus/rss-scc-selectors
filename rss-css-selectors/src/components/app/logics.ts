@@ -12,14 +12,14 @@ let level: Leveltype;
 let currentLevel = parseInt(localStorage.currentLevel,10) || 2;
 // const levelTimeout = 1000;
 // let finished = false;
-// const blankProgress = {
-//     totalCorrect : 0,
-//     percentComplete : 0,
-//     lastPercentEvent : 0,
-//     guessHistory : {}
-//   }
-
-// const progress = JSON.parse(localStorage.getItem("progress") || '') || blankProgress;
+const blankProgress = {
+    totalCorrect : 0,
+    percentComplete : 0,
+    lastPercentEvent : 0,
+    guessHistory : {}
+  }
+const local = localStorage.getItem("progress");
+const progress = JSON.parse(`${local}`) || blankProgress;
 
 export function loadLevel() {
     if (currentLevel < 0 || currentLevel >= levels.length) {
@@ -30,11 +30,9 @@ export function loadLevel() {
     level = levels[currentLevel];
 
       if(currentLevel < 3) {
-        const note = document.querySelector(".note-toggle");
-        note?.setAttribute('style', 'display: block');
+        document.querySelector(".note-toggle")?.setAttribute('style', 'display: block');
       } else {
-        const note = document.querySelector(".note-toggle");
-        note?.setAttribute('style', 'display: none');
+        document.querySelector(".note-toggle")?.setAttribute('style', 'display: none');
       }
 
     const currentremove = document.querySelector('.level-menu .current');
@@ -93,18 +91,17 @@ export function loadLevel() {
 }
 
 function loadBoard() {
-    // const boardString = level.board;  // just a placeholder to iterate over...
-    // boardMarkup = ""; // what is this
-    // const tableMarkup = ""; // what is this
-    // const editorMarkup = ""; // this is a string that represents the HTML
     showHelp();
 
     const markupHolder = document.createElement('div');
 
     level.boardMarkup.trim().split('\n').forEach((el: string) => {
+        console.log('tag',el);
         const elem = new DOMParser().parseFromString(el, 'text/html');
+        // console.log('elem',elem);
         const result = getMarkup(elem.documentElement);
-          markupHolder.append(result);
+        // console.log('result',result);
+        markupHolder.append(result);
       });
 
     const table = document.querySelector('.table');
@@ -119,9 +116,9 @@ function loadBoard() {
 
     const markup = document.querySelector('.markup');
     if (markup && markupHolder) {
-        markup.innerHTML = '<div>&ltdiv class="table"&gt' + markupHolder + '&lt/div&gt</div>';
-        // markup.innerHTML = '<div>&ltdiv class="table"&gt' + '&lt/div&gt</div>';
+        markup.innerHTML = '<div>&ltdiv class="table"&gt' + markupHolder.innerHTML + '&lt/div&gt</div>';
     }
+    // console.log(markupHolder.innerHTML);
 }
 
 function addNametags() {
@@ -134,18 +131,19 @@ function addNametags() {
     if (tablewrap) {
         tablewrap.setAttribute('style', 'transform: rotateX(0)');
     }
-    //   $(".table-wrapper").width($(".table-wrapper").width());
 
     const table = document.querySelectorAll('.table *');
-    table.forEach(() => {
-        // if($(this).attr("for")){
-        //       var pos = $(this).position();
-        //       var width = $(this).width();
-        //       var nameTag = $("<div class='nametag'>" + $(this).attr("for") + "</div>");
-        //       $(".nametags").append(nameTag);
-        //       var tagPos = pos.left + (width/2) - nameTag.width()/2 + 12;
-        //       nameTag.css("left",tagPos);
-        //     }
+    table.forEach((el) => {
+        if(el.hasAttribute("for")){
+              const pos = el.getAttribute('position');
+              const width = el.getAttribute('width');
+              console.log(pos, width)
+            //   const nameTag: HTMLElement;
+            //   nameTag.innerHTML = "<div class='nametag'>" + el.setAttribute("for") + "</div>";
+            //   document.querySelector(".nametags")?.append(nameTag);
+            //   const tagPos = pos.left + (width/2) - nameTag.width()/2 + 12;
+            //   nameTag.setAttribute("style",`left:${tagPos}`);
+            }
     });
 
     if (tablewrap) {
@@ -202,13 +200,11 @@ function showHelp() {
             textContent: '',
         };
         const element = new ElementCreator(examparams);
-        const exam = document.querySelector('.display-help .examples');
-        exam?.append(element.getElement());
+        document.querySelector('.display-help .examples')?.append(element.getElement());
         element.addInnerHTML(examples[i]);
-        const examtitles = document.querySelector(
+        document.querySelector(
             '.display-help .examples-title'
-        );
-        examtitles?.setAttribute('style', 'display: block');
+        )?.setAttribute('style', 'display: block');
     }
 
     const displayhint = document.querySelector('.display-help .hint');
@@ -223,7 +219,7 @@ function showHelp() {
 }
 
 function resetTable() {
-    console.log(level.width);
+    // console.log(level.width);
     document.querySelector('.display-help')?.classList.remove('open-help');
     document.querySelector('.clean,.strobe')?.classList.remove('clean,strobe');
     document.querySelector('input')?.classList.add('input-strobe');
@@ -234,17 +230,17 @@ function resetTable() {
     document.querySelector('.table-edge')?.setAttribute('style', `width: ${level.width}px`);
 }
 
-//  export function checkCompleted(levelNumber: number){
-// if(progress.guessHistory[levelNumber]){
-//   if(progress.guessHistory[levelNumber].correct){
-//     return true;
-//   } else {
-//     return false;
-//   }
-// } else {
-//   return false;
-// }
-//   }
+ export function checkCompleted(levelNumber: number){
+if(progress.guessHistory[levelNumber]){
+  if(progress.guessHistory[levelNumber].correct){
+    return true;
+  } else {
+    return false;
+  }
+} else {
+  return false;
+}
+  }
 
 //   function updateProgressUI(levelNumber: number, completed: boolean){
 //     if(completed) {
@@ -271,9 +267,10 @@ export function buildLevelmenu() {
         const levelmenu = document.querySelector('.level-menu .levels');
         levelmenu?.append(item);
 
-        //   if(checkCompleted(i)){
-        //     item.classList.add("completed");
-        //   }
+
+          if(checkCompleted(i)){
+            item.classList.add("completed");
+          }
 
         item.addEventListener('click', function () {
             // finished = false;
@@ -287,7 +284,7 @@ function getMarkup(el: Element) {
     // const hasChildren = el.children.length > 0 ? true : false;
     // const elName = el.tagName.toLowerCase();
     const wrapperEl = document.createElement('div');
-    console.log(el);
+    console.log('element',el);
     // return el;
     // const attributeString = '';
 
@@ -320,111 +317,112 @@ function getMarkup(el: Element) {
     return wrapperEl;
 }
 
-// function enterHit() {
-//     const enter = document.querySelector('.enter-button');
-//     enter?.classList.remove('enterhit');
-//     // const widthel = document.querySelector('.enter-button');
-//     enter?.setAttribute('style', 'width: ');
+function enterHit() {
+    const enter = document.querySelector('.enter-button');
+    enter?.classList.remove('enterhit');
+    // const widthel = document.querySelector('.enter-button');
+    enter?.setAttribute('style', 'width: ');
 
-//     // .width($('.enter-button').width());
+    // .width($('.enter-button').width());
 
-//     enter?.classList.add('enterhit');
+    enter?.classList.add('enterhit');
 
-//     const value = document.querySelector('input');
-//     handleInput(value);
-// }
+    const valinput = document.querySelector('input');
+    const par = valinput?.value
+    handleInput(par||'');
+}
 
-// function handleInput(text: string){
-//     if(parseInt(text,10) > 0 && parseInt(text,10) < levels.length+1) {
-//       currentLevel = parseInt(text,10) - 1;
-//       loadLevel();
-//       return;
-//     }
-//     fireRule(text);
-//   }
+function handleInput(text: string){
+    if(parseInt(text,10) > 0 && parseInt(text,10) < levels.length+1) {
+      currentLevel = parseInt(text,10) - 1;
+      loadLevel();
+      return;
+    }
+    fireRule(text);
+  }
 
-// function fireRule(rule: string) {
+function fireRule(rule: string) {
 
-//   const shake = document.querySelector(".shake");
-//   shake?.classList.remove("shake");
+  const shake = document.querySelector(".shake");
+  shake?.classList.remove("shake");
 
-// //   const par = document.querySelectorAll(".strobe,.clean,.shake");
-// //   par.forEach(function(){
-// //     $(this).width($(this).width());
-// //     $(this).removeAttr("style");
-// //   });
+//   const par = document.querySelectorAll(".strobe,.clean,.shake");
+//   par.forEach(function(){
+//     $(this).width($(this).width());
+//     $(this).removeAttr("style");
+//   });
 
 //   const baseTable = document.querySelector('.table');
 
-// //   try {
-// //     const rules = document.querySelector(".table");
-// //     rules.find(rule).not(baseTable);
-// //   }
-// //   catch(err) {
-// //     rule = null;
-// //   }
-
-//   const ruleSelected = document.querySelector(".table")?.querySelector(rule);
-// //   if(ruleSelectedin != baseTable){
-// //     const ruleSelected = ruleSelectedin?.querySelector(rule);
-// // }
-//   const levelSelected = document.querySelector(".table")?.querySelector(level.selector);
-// //   .not(baseTable); // What the person finds
-
-//   const win = false;
-
-// //   if(ruleSelected.length == 0) {
-// //     const edit = document.querySelector(".editor");
-// //     edit?.classList.add("shake");
-// //   }
-
-// //   if(ruleSelected.length == levelSelected.length && ruleSelected.length > 0){
-// //     win = checkResults(ruleSelected,levelSelected,rule);
-// //   }
-
-//   if(win){
-//     ruleSelected?.classList.remove("strobe");
-//     ruleSelected?.classList.add("clean");
-//     // const winwin = document.querySelector("input");
-//     // winwin?.getAttribute();
-
-//     const wrap = document.querySelector(".input-wrapper");
-//     wrap?.setAttribute("style", "opacity: 0.2");
-//     // updateProgressUI(currentLevel, true);
-//     currentLevel++;
-
-// //     if(currentLevel >= levels.length) {
-// //       winGame();
-// //     } else {
-// //       setTimeout(function(){
-// //         loadLevel();
-// //       },levelTimeout);
-// //     }
-// //   } else {
-// //     ruleSelected?.classList.remove("strobe");
-// //     ruleSelected?.classList.add("shake");
-
-//     setTimeout(function(){
-//       const shake = document.querySelector(".shake");
-//       shake?.classList.remove("shake");
-//       const strobe = document.querySelector(".strobe");
-//       strobe?.classList.remove("strobe");
-//       levelSelected?.classList.add("strobe");
-//     },500);
-
-//     const result = document.querySelector(".result");
-//     for(let i = 1; i >= 0; i = i - 0.1)
-//     setTimeout( function(){
-//         result?.setAttribute("style","opacity:${i}")
-//     },1000)
+//   try {
+//     const rules = document.querySelector(".table");
+//     rules.find(rule).not(baseTable);
+//   }
+//   catch(err) {
+//     rule = null;
 //   }
 
-// //   if(win){
-// //     trackProgress(currentLevel-1, "correct");
-// //   } else {
-// //     trackProgress(currentLevel, "incorrect");
-// //   }
+  const ruleSelected = document.querySelector(".table")?.querySelector(rule);
+//   if(ruleSelectedin != baseTable){
+//     const ruleSelected = ruleSelectedin?.querySelector(rule);
 // }
+  const levelSelected = document.querySelector(".table")?.querySelector(level.selector);
+//   .not(baseTable); // What the person finds
+
+  const win = false;
+
+//   if(ruleSelected.length == 0) {
+//     const edit = document.querySelector(".editor");
+//     edit?.classList.add("shake");
+//   }
+
+//   if(ruleSelected.length == levelSelected.length && ruleSelected.length > 0){
+//     win = checkResults(ruleSelected,levelSelected,rule);
+//   }
+
+  if(win){
+    ruleSelected?.classList.remove("strobe");
+    ruleSelected?.classList.add("clean");
+    // const winwin = document.querySelector("input");
+    // winwin?.getAttribute();
+
+    const wrap = document.querySelector(".input-wrapper");
+    wrap?.setAttribute("style", "opacity: 0.2");
+    // updateProgressUI(currentLevel, true);
+    currentLevel++;
+
+//     if(currentLevel >= levels.length) {
+//       winGame();
+//     } else {
+//       setTimeout(function(){
+//         loadLevel();
+//       },levelTimeout);
+//     }
+//   } else {
+//     ruleSelected?.classList.remove("strobe");
+//     ruleSelected?.classList.add("shake");
+
+    setTimeout(function(){
+      const shake = document.querySelector(".shake");
+      shake?.classList.remove("shake");
+      const strobe = document.querySelector(".strobe");
+      strobe?.classList.remove("strobe");
+      levelSelected?.classList.add("strobe");
+    },500);
+
+    const result = document.querySelector(".result");
+    for(let i = 1; i >= 0; i = i - 0.1)
+    setTimeout( function(){
+        result?.setAttribute("style","opacity:${i}")
+    },1000)
+  }
+
+  if(win){
+    trackProgress(currentLevel-1, "correct");
+  } else {
+    trackProgress(currentLevel, "incorrect");
+  }
+}
 
 function hideTooltip(){
     document.querySelector(".enhance")?.classList.remove("enhance");
@@ -432,30 +430,30 @@ function hideTooltip(){
     document.querySelector(".helper")?.setAttribute("style","display:none");
   }
 
-// function trackProgress(levelNumber: number, type: string){
-//   if(!progress.guessHistory[levelNumber]) {
-//     progress.guessHistory[levelNumber] = {
-//       correct : false,
-//       incorrectCount : 0,
-//       gaSent : false
-//     };
-//   }
+function trackProgress(levelNumber: number, type: string){
+  if(!progress.guessHistory[levelNumber]) {
+    progress.guessHistory[levelNumber] = {
+      correct : false,
+      incorrectCount : 0,
+      gaSent : false
+    };
+  }
 
-//   const levelStats = progress.guessHistory[levelNumber];
+  const levelStats = progress.guessHistory[levelNumber];
 
-//   if(type == "incorrect"){
-//     if(levelStats.correct == false) {
-//       levelStats.incorrectCount++;
-//     }
-//   } else {
-//     if(levelStats.correct == false) {
-//       levelStats.correct = true;
-//       progress.totalCorrect++;
-//       progress.percentComplete = progress.totalCorrect / levels.length;
-//       levelStats.gaSent = true;
-//       sendEvent("guess", "correct", levelNumber + 1);
-//     }
-//   }
+  if(type == "incorrect"){
+    if(levelStats.correct == false) {
+      levelStats.incorrectCount++;
+    }
+  } else {
+    if(levelStats.correct == false) {
+      levelStats.correct = true;
+      progress.totalCorrect++;
+      progress.percentComplete = progress.totalCorrect / levels.length;
+      levelStats.gaSent = true;
+    //   sendEvent("guess", "correct", levelNumber + 1);
+    }
+  }
 
 //   const increment = .1;
 //   if(progress.percentComplete >= progress.lastPercentEvent + increment) {
@@ -463,8 +461,8 @@ function hideTooltip(){
 //     sendEvent("progress","percent", Math.round(progress.lastPercentEvent * 100));
 //   }
 
-//   localStorage.setItem("progress",JSON.stringify(progress));
-// }
+  localStorage.setItem("progress",JSON.stringify(progress));
+}
 
 // function sendEvent(category: string, action: string, label: number){
 //   if(!ga){
@@ -533,6 +531,11 @@ document.addEventListener('DOMContentLoaded', function () {
             loadLevel();
             return false;
       })
+
+      document.querySelector(".enter-button")?.addEventListener("click",function(){
+        enterHit();
+      })
+      buildLevelmenu();
 
 })
 

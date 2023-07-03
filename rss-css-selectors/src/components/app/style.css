@@ -113,3 +113,31 @@
     animation: strobeStart .5s ease-out, strobe 1s infinite;
     animation-delay: 0s, .5s;
   }
+.markup {
+  line-height: 150%;
+  font-family: menlo;
+  z-index: 1;
+}
+.markup * {
+    font-family: menlo,monospace;
+    cursor: default;
+  }
+  .markup {
+  line-height: 150%;
+}
+
+.markup * {
+  color: rgba(255,255,255,.3);
+}
+
+.markup .enhance {
+  color: rgba(255,255,255,.7);
+}
+
+.markup div {
+  padding-left: 20px;
+}
+
+.markup > div {
+  padding-left: 0px;
+}

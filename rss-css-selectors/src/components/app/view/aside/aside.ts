@@ -164,7 +164,7 @@ class Help {
         };
         const levelsparams: ElementsParams ={
             tag: 'div',
-            classNames: [CssClasses.LEVEL],
+            classNames: [CssClasses.LEVELS],
             textContent: TEXT
         };
         const resetparams: ElementsParams ={

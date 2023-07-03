@@ -205,6 +205,14 @@
   background: rgba(255,255,255,1);
   transition: all .1s ease-out;
 }
+.level-menu h2 {
+    font-size: 22px;
+    color: white;
+    opacity: .4;
+    font-weight: normal;
+    margin: 0;
+    padding: 23px 0 14px 16px;
+  }
 
 .level-menu-toggle:before {
   top: -10px;
