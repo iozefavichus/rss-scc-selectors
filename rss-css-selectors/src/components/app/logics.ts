@@ -9,7 +9,7 @@ const CssClasses = {
 };
 
 let level: Leveltype;
-let currentLevel = parseInt(localStorage.currentLevel,10) || 2;
+let currentLevel = parseInt(localStorage.currentLevel,10) || 0;
 // const levelTimeout = 1000;
 // let finished = false;
 const blankProgress = {
@@ -92,8 +92,26 @@ export function loadLevel() {
 
 function loadBoard() {
     showHelp();
+    const markuparray = level.boardMarkup.split('\n');
+    let result = '';
+    markuparray.forEach((el)=>{
+        for(let i=0; i< el.length; i++){
+            if(el[i] =='<'){
+                result = result + '&lt';
+            }
+            else if(el[i] =='>'){
+                result = result + '&gt'+ '<br>';
+            } else {
+                result = result + el[i];
+            }
+        }
+    })
+    // console.log(result);
+    // console.log(markuparray);
 
-    const markupHolder = document.createElement('div');
+    // const markupHolder = document.createElement('div');
+    // markupHolder.innerHTML = level.boardMarkup;
+    // console.log(level.boardMarkup);
 
     // level.boardMarkup.trim().split('\n').forEach((el: string) => {
     //     console.log('tag',el);
@@ -104,6 +122,7 @@ function loadBoard() {
     //     markupHolder.append(result);
     //   });
 
+
     const table = document.querySelector('.table');
     if (table) {
         table.innerHTML = level.boardMarkup;
@@ -111,8 +130,7 @@ function loadBoard() {
         //     table.innerHTML = level.boardMarkup[index];
         //     console.log('plate', index);
         //   })
-        // table.innerHTML = level.boardMarkup[i])
-        // table.innerHTML = level.boardMarkup;
+
     }
 
     addNametags();
@@ -123,8 +141,8 @@ function loadBoard() {
     }
 
     const markup = document.querySelector('.markup');
-    if (markup && markupHolder) {
-        markup.innerHTML = '<div>&ltdiv class="table"&gt' + markupHolder.innerHTML + '&lt/div&gt</div>';
+    if (markup) {
+        markup.innerHTML = '<div>&ltdiv class="table"&gt' + '<br>'+ result + '&lt/div&gt</div>';
     }
     // console.log(markupHolder.innerHTML);
 }
