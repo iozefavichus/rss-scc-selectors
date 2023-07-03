@@ -6,7 +6,8 @@ import { ElementsParams } from '../../../../types/index';
 const CssClasses = {
     FOOTER: 'footer',
     GITHUB: 'github',
-    RSSCHOOL: 'rsschool'
+    RSSCHOOL: 'rsschool',
+    LINK: 'link'
 }
 const TEXT = 'Made by @iozefavichus';
 const TEXTGITHUB = 'Github';
@@ -39,6 +40,11 @@ export default class FooterView{
             classNames: [CssClasses.RSSCHOOL],
             textContent: ''
         };
+        const linkparams: ElementsParams ={
+            tag: 'a',
+            classNames: [CssClasses.LINK],
+            textContent: ''
+        };
 
         const elementCreator = new ElementCreator(params);
 
@@ -47,11 +53,16 @@ export default class FooterView{
         const res: HTMLElement = github.getElement();
         res.setAttribute("href", "https://github.com/iozefavichus");
 
+        const link  = new ElementCreator(linkparams);
+        elementCreator.addInnerElement(link.getElement());
+        const linkatr: HTMLElement = link.getElement();
+        linkatr.setAttribute("href", "https://rs.school/");
+
         const rss = new ElementCreator(rssparams);
-        elementCreator.addInnerElement(rss.getElement());
+        link.addInnerElement(rss.getElement());
 
         const rsschool: HTMLElement = rss.getElement();
-        rsschool.setAttribute("href", "https://rs.school/");
+
         rsschool.setAttribute("src", "../../../../images/rs_school_js.svg");
 
         return elementCreator;
