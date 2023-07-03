@@ -10,11 +10,9 @@ export const levels = [
         '<strong>div</strong> selects all <tag>div</tag> elements.',
         '<strong>p</strong> selects all <tag>p</tag> elements.',
       ],
-      boardMarkup: `
-      <plate/>
-      <plate/>
-      `,
-      width: 242,
+      boardMarkup: `<plate></plate>
+      <plate></plate>`,
+      width: 272,
     },
   {
     helpTitle : "Select elements by their type",
@@ -28,11 +26,11 @@ export const levels = [
       '<strong>p</strong> selects all <tag>p</tag> elements.',
     ],
     boardMarkup: `
-    <bento/>
-    <plate/>
-    <bento/>
+    <bento></bento>
+    <plate></plate>
+    <bento></bento>
     `,
-    width: 367,
+    width: 397,
   },
   {
     helpTitle: "Select elements with an ID",
@@ -46,11 +44,11 @@ export const levels = [
       '<strong>ul#long</strong> selects <tag>ul id="long"</tag>'
     ],
     boardMarkup : `
-    <plate id="fancy"/>
-    <plate/>
-    <bento/>
+    <plate id="fancy"></plate>
+    <plate></plate>
+    <bento></bento>
     `,
-    width: 367,
+    width: 397,
   },
   {
     helpTitle: "Select an element inside another element",
@@ -64,13 +62,13 @@ export const levels = [
       '<strong>#fancy&nbsp;&nbsp;span</strong> selects any <tag>span</tag> elements that are inside of the element with <strong>id="fancy"</strong>',
     ],
     boardMarkup : `
-    <bento/>
+    <bento></bento>
     <plate>
-      <apple/>
+    <apple></apple>
     </plate>
-    <apple/>
+    <apple></apple>
     `,
-    width: 327,
+    width: 357,
   },
   {
     helpTitle: "Combine the Descendant & ID Selectors",
@@ -84,16 +82,16 @@ export const levels = [
     ],
     boardMarkup : `
     <bento>
-    <orange/>
+      <orange></orange>
     </bento>
     <plate id="fancy">
-      <pickle/>
+      <pickle></pickle>
     </plate>
     <plate>
-      <pickle/>
+      <pickle></pickle>
     </plate>
     `,
-    width: 367,
+    width: 397,
   },
   {
     helpTitle: "Select elements by their class",
@@ -106,14 +104,14 @@ export const levels = [
     '<strong>.neato</strong> selects all elements with <strong>class="neato"</strong>'
     ],
     boardMarkup : `
-    <apple/>
-    <apple class="small"/>
+    <apple></apple>
+    <apple class="small"></apple>
     <plate>
-      <apple class="small"/>
+      <apple class="small"><apple class="small"></apple>
     </plate>
-    <plate/>
+    <plate></plate>
     `,
-    width: 380,
+    width: 410,
   },
   {
     helpTitle: "Combine the Class Selector",
@@ -127,18 +125,18 @@ export const levels = [
       '<strong>#big.wide</strong> selects all elements with <strong>id="big"</strong> that also have <strong>class="wide"</strong>'
     ],
     boardMarkup :`
-    <apple/>
-    <apple class="small"/>
+    <apple></apple>
+    <apple class="small"></apple>
     <bento>
-      <orange class="small"/>
+      <orange class="small"></orange>
     </bento>
     <plate>
-      <orange/>
+      <orange></orange>
     </plate>
     <plate>
-      <orange class="small"/>
+      <orange class="small"></orange>
     </plate>`,
-    width: 504,
+    width: 534,
   },
   {
     helpTitle: "You can do it...",
@@ -150,19 +148,19 @@ export const levels = [
     examples : [],
     boardMarkup : `
     <bento>
-      <orange/>
+      <orange></orange>
     </bento>
-    <orange class="small"/>
+    <orange class="small"></orange>
     <bento>
-      <orange class="small"/>
-    </bento>
-    <bento>
-      <apple class="small"/>
+      <orange class="small"></orange>
     </bento>
     <bento>
-      <orange class="small"/>
+      <apple class="small"></apple>
+    </bento>
+    <bento>
+      <orange class="small"></orange>
     </bento>
     `,
-    width: 544,
+    width: 574,
   }
 ]

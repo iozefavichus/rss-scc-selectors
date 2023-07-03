@@ -17,6 +17,7 @@
   z-index: 999;
   position:relative;
   white-space: nowrap;
+  /* width:600px; */
 }
 
 .table-surface {
@@ -79,6 +80,7 @@
 apple {
   background: #e41919;
   border-color: #ab1212;
+  width: 60px;
 }
 
 orange {
@@ -291,3 +293,71 @@ orange {
     transform: scale(1);
   }
 }
+
+orange, apple, pickle, bento, plate {
+    transition: transform ease-out .2s;
+  }
+
+  .table plate {
+  z-index: 99999;
+}
+
+bento, plate {
+    box-shadow: 0px 8px 0px rgba(0,0,0,.1);
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+    position: relative;
+  }
+plate {
+  border-bottom: solid 5px #DDD;
+  background: white;
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+}
+bento {
+    height: 100px;
+    background: brown;
+    position: relative;
+    border: solid 3px #711c12;
+    border-width: 20px 2px;
+  }
+  plate bento {
+    height: 74px;
+    width: 74px;
+    position: absolute;
+    top: -8px;
+    left:4px;
+  }
+
+plate bento apple,
+plate bento orange {
+  top: -36px !important;
+}
+
+bento:before {
+  content:"";
+  position: absolute;
+  width: calc(100%);
+  top: 0;
+  left:0;
+  border: solid 10px rgba(0,0,0,.1);
+  border-width: 10px 0 0 0px;
+}
+plate:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: calc(50% - 32px);
+    top: calc(50% - 32px);
+    height: 65px;
+    width: 65px;
+    border-radius: 60px;
+    border-top: solid 6px #CCC;
+    opacity: .4;
+    background: rgba(255,255,255,1);
+  }
+  plate [data-hovered] {
+    box-shadow: 0 0 0 6px rgba(0,0,0,.3);
+  }  

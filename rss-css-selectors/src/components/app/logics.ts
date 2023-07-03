@@ -95,20 +95,29 @@ function loadBoard() {
 
     const markupHolder = document.createElement('div');
 
-    level.boardMarkup.trim().split('\n').forEach((el: string) => {
-        console.log('tag',el);
-        const elem = new DOMParser().parseFromString(el, 'text/html');
-        // console.log('elem',elem);
-        const result = getMarkup(elem.documentElement);
-        // console.log('result',result);
-        markupHolder.append(result);
-      });
+    // level.boardMarkup.trim().split('\n').forEach((el: string) => {
+    //     console.log('tag',el);
+    //     const elem = new DOMParser().parseFromString(el, 'text/html');
+    //     // console.log('elem',elem);
+    //     const result = getMarkup(elem.documentElement);
+    //     // console.log('result',result);
+    //     markupHolder.append(result);
+    //   });
 
     const table = document.querySelector('.table');
     if (table) {
+        console.log(level.boardMarkup);
         table.innerHTML = level.boardMarkup;
+        // level.boardMarkup.forEach((el:string, index:number) => {
+        //     table.innerHTML = level.boardMarkup[index];
+        //     console.log('plate', index);
+        //   })
+        // table.innerHTML = level.boardMarkup[i])
+        // table.innerHTML = level.boardMarkup;
     }
+
     addNametags();
+
     const inputwrap = document.querySelector('.table *');
     if (inputwrap) {
         inputwrap.classList.add('pop');
@@ -280,42 +289,42 @@ export function buildLevelmenu() {
     }
 }
 
-function getMarkup(el: Element) {
-    // const hasChildren = el.children.length > 0 ? true : false;
-    // const elName = el.tagName.toLowerCase();
-    const wrapperEl = document.createElement('div');
-    console.log('element',el);
-    // return el;
-    // const attributeString = '';
+// function getMarkup(el: Element) {
+//     // const hasChildren = el.children.length > 0 ? true : false;
+//     // const elName = el.tagName.toLowerCase();
+//     const wrapperEl = document.createElement('div');
+//     console.log('element',el);
+//     // return el;
+//     // const attributeString = '';
 
-    // this.forEach( el.attributes, function () {
-    //     if (this.specified) {
-    //         attributeString =
-    //             attributeString + ' ' + this.name + '="' + this.value + '"';
-    //     }
-    // });
-    // let attributeSpace = '';
-    // if (attributeString.length > 0) {
-    //     attributeSpace = ' ';
-    // }
-    // if (hasChildren) {
-    //     wrapperEl.innerText =
-    //         '<' + elName + attributeSpace + attributeString + '>';
+//     // this.forEach( el.attributes, function () {
+//     //     if (this.specified) {
+//     //         attributeString =
+//     //             attributeString + ' ' + this.name + '="' + this.value + '"';
+//     //     }
+//     // });
+//     // let attributeSpace = '';
+//     // if (attributeString.length > 0) {
+//     //     attributeSpace = ' ';
+//     // }
+//     // if (hasChildren) {
+//     //     wrapperEl.innerText =
+//     //         '<' + elName + attributeSpace + attributeString + '>';
 
-    //      for (let i = 0; i < el.children.length;  i += 1) {
-    //         wrapperEl.append(getMarkup(el));
-    //      }
-    //     const array = Array.from(el.children);
-    //     array.forEach((el: Element) => {
-    //         wrapperEl.append(getMarkup(el));
-    //     });
-    //     wrapperEl.append('&lt;/' + elName + '&gt;');
-    // } else {
-    //     wrapperEl.innerText =
-    //         '<' + elName + attributeSpace + attributeString + ' />';
-    // }
-    return wrapperEl;
-}
+//     //      for (let i = 0; i < el.children.length;  i += 1) {
+//     //         wrapperEl.append(getMarkup(el));
+//     //      }
+//     //     const array = Array.from(el.children);
+//     //     array.forEach((el: Element) => {
+//     //         wrapperEl.append(getMarkup(el));
+//     //     });
+//     //     wrapperEl.append('&lt;/' + elName + '&gt;');
+//     // } else {
+//     //     wrapperEl.innerText =
+//     //         '<' + elName + attributeSpace + attributeString + ' />';
+//     // }
+//     return wrapperEl;
+// }
 
 function enterHit() {
     const enter = document.querySelector('.enter-button');
