@@ -217,7 +217,7 @@ function resetTable() {
     document.querySelector('.table-edge')?.setAttribute('style', `width: ${level.width}px`);
 }
 
- export function checkCompleted(levelNumber: number){
+export function checkCompleted(levelNumber: number){
 if(progress.guessHistory[levelNumber]){
   if(progress.guessHistory[levelNumber].correct){
     return true;
@@ -245,7 +245,8 @@ export function buildLevelmenu() {
     for (let i = 0; i < levels.length; i++) {
         const level = levels[i];
         const item = document.createElement('a');
-
+        item.dataset.datanum = `${i}`;
+        item.classList.add('asidelevelmenu');
         item.innerHTML =
             "<span class='checkmark'></span><span class='level-number'>" +
             (i + 1) +
@@ -258,10 +259,6 @@ export function buildLevelmenu() {
           if(checkCompleted(i)){
             item.classList.add("completed");
           }
-
-        item.addEventListener('click', function () {
-            loadLevel(), closeMenu();
-        });
     }
 }
 
@@ -454,6 +451,16 @@ document.addEventListener('DOMContentLoaded', function () {
       document.querySelector(".reset-progress")?.addEventListener("click",function(){
         resetProgress();
         return false;
+      })
+
+
+      const asidelevel = document.querySelectorAll('.asidelevelmenu');
+      asidelevel.forEach((el) => {
+        el.addEventListener("click",function(){
+            currentLevel = Number(el.getAttribute('data-datanum'));
+            loadLevel();
+            closeMenu();
+          })
       })
 
 })
