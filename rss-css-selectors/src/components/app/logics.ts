@@ -18,7 +18,7 @@ const blankProgress = {
     guessHistory : {}
   }
 const local = localStorage.getItem("progress");
-const progress = JSON.parse(`${local}`) || blankProgress;
+let progress = JSON.parse(`${local}`) || blankProgress;
 
 export function loadLevel() {
     if (currentLevel < 0 || currentLevel >= levels.length) {
@@ -67,9 +67,6 @@ export function loadLevel() {
     resetTable();
 
     updateProgressUI(currentLevel, checkCompleted(currentLevel));
-
-    //
-    //   $("input").val("").focus();
 
     const inputwrap = document.querySelector('.input-wrapper');
     if (inputwrap) {
@@ -296,7 +293,7 @@ function fireRule(rule: string) {
   });
 
   const ruleSelectedtext = document.getElementsByTagName("input")[0].value;
-  const ruleSelected = document.querySelector(".table")?.querySelector(rule);
+  const ruleSelected = document.querySelector(".table")?.querySelectorAll(rule);
 
   const levelSelected = level.selector;
 
@@ -308,8 +305,10 @@ function fireRule(rule: string) {
  }
 
   if(win){
-    ruleSelected?.classList.remove("strobe");
-    ruleSelected?.classList.add("clean");
+    ruleSelected?.forEach((el)=>{
+        el.classList.remove("strobe");
+        el.classList.add("clean");
+    })
     document.getElementsByTagName("input")[0].value = '';
 
     const wrap = document.querySelector(".input-wrapper");
@@ -325,13 +324,14 @@ function fireRule(rule: string) {
       },levelTimeout);
     }
   } else {
-    ruleSelected?.classList.remove("strobe");
-    ruleSelected?.classList.add("shake");
+    ruleSelected?.forEach((el)=>{
+        el.classList.remove("strobe");
+        el.classList.add("shake");
+    })
 
     setTimeout(function(){
       document.querySelector(".shake")?.classList.remove("shake");
       document.querySelector(".strobe")?.classList.remove("strobe");
-    //   levelSelected?.classList.add("strobe");
     },500);
 
     const result = document.querySelector(".result");
@@ -375,15 +375,8 @@ function trackProgress(levelNumber: number, type: string){
       progress.totalCorrect++;
       progress.percentComplete = progress.totalCorrect / levels.length;
       levelStats.gaSent = true;
-    //   sendEvent("guess", "correct", levelNumber + 1);
     }
   }
-
-//   const increment = .1;
-//   if(progress.percentComplete >= progress.lastPercentEvent + increment) {
-//     progress.lastPercentEvent = progress.lastPercentEvent + increment;
-//     sendEvent("progress","percent", Math.round(progress.lastPercentEvent * 100));
-//   }
 
   localStorage.setItem("progress",JSON.stringify(progress));
 }
@@ -405,6 +398,16 @@ function addAnimation(el: HTMLElement|null){
         })
     }
   }
+
+function resetProgress(){
+  currentLevel = 0;
+  progress = blankProgress;
+  localStorage.setItem("progress",JSON.stringify(progress));
+
+  document.querySelector(".completed")?.classList.remove("completed");
+  loadLevel();
+  closeMenu();
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector(".level-menu-toggle-wrapper")?.addEventListener("click",function(){
@@ -447,6 +450,11 @@ document.addEventListener('DOMContentLoaded', function () {
           return false;
         }
       });
+
+      document.querySelector(".reset-progress")?.addEventListener("click",function(){
+        resetProgress();
+        return false;
+      })
 
 })
 

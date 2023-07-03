@@ -159,3 +159,13 @@
       top: 12px;
     }
   }
+
+.clean {
+  animation: cleanme .2s 1;
+  transform: translateY(-600px);
+}
+
+@keyframes cleanme {
+  0% {   transform: translateY(0px) rotate3d(0,0,0,0deg); }
+  100% { transform: translateY(-600px) rotate3d(0,0,0,0deg);}
+}
