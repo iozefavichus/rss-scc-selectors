@@ -10,7 +10,7 @@ const CssClasses = {
 
 let level: Leveltype;
 let currentLevel = parseInt(localStorage.currentLevel,10) || 0;
-// const levelTimeout = 1000;
+const levelTimeout = 1000;
 // let finished = false;
 const blankProgress = {
     totalCorrect : 0,
@@ -67,7 +67,7 @@ export function loadLevel() {
     loadBoard();
     resetTable();
 
-    // updateProgressUI(currentLevel, checkCompleted(currentLevel));
+    updateProgressUI(currentLevel, checkCompleted(currentLevel));
 
     //
     //   $("input").val("").focus();
@@ -106,31 +106,10 @@ function loadBoard() {
             }
         }
     })
-    // console.log(result);
-    // console.log(markuparray);
-
-    // const markupHolder = document.createElement('div');
-    // markupHolder.innerHTML = level.boardMarkup;
-    // console.log(level.boardMarkup);
-
-    // level.boardMarkup.trim().split('\n').forEach((el: string) => {
-    //     console.log('tag',el);
-    //     const elem = new DOMParser().parseFromString(el, 'text/html');
-    //     // console.log('elem',elem);
-    //     const result = getMarkup(elem.documentElement);
-    //     // console.log('result',result);
-    //     markupHolder.append(result);
-    //   });
-
 
     const table = document.querySelector('.table');
     if (table) {
         table.innerHTML = level.boardMarkup;
-        // level.boardMarkup.forEach((el:string, index:number) => {
-        //     table.innerHTML = level.boardMarkup[index];
-        //     console.log('plate', index);
-        //   })
-
     }
 
     addNametags();
@@ -144,7 +123,6 @@ function loadBoard() {
     if (markup) {
         markup.innerHTML = '<div>&ltdiv class="table"&gt' + '<br>'+ result + '&lt/div&gt</div>';
     }
-    // console.log(markupHolder.innerHTML);
 }
 
 function addNametags() {
@@ -268,17 +246,17 @@ if(progress.guessHistory[levelNumber]){
 }
   }
 
-//   function updateProgressUI(levelNumber: number, completed: boolean){
-//     if(completed) {
-//       const levelnumb = document.querySelector(".levels a:nth-child("+ (levelNumber+1) + ")");
-//       levelnumb?.classList.add("completed");
-//       const compl = document.querySelector(".level-header");
-//       compl?.classList.add("completed");
-//     } else {
-//       const compl = document.querySelector(".level-header");
-//       compl?.classList.remove("completed");
-//     }
-//   }
+  function updateProgressUI(levelNumber: number, completed: boolean){
+    if(completed) {
+      const levelnumb = document.querySelector(".levels a:nth-child("+ (levelNumber+1) + ")");
+      levelnumb?.classList.add("completed");
+      const compl = document.querySelector(".level-header");
+      compl?.classList.add("completed");
+    } else {
+      const compl = document.querySelector(".level-header");
+      compl?.classList.remove("completed");
+    }
+  }
 
 export function buildLevelmenu() {
     for (let i = 0; i < levels.length; i++) {
@@ -299,8 +277,6 @@ export function buildLevelmenu() {
           }
 
         item.addEventListener('click', function () {
-            // finished = false;
-            // currentLevel = $(this).index();
             loadLevel(), closeMenu();
         });
     }
@@ -346,10 +322,7 @@ export function buildLevelmenu() {
 function enterHit() {
     const enter = document.querySelector('.enter-button');
     enter?.classList.remove('enterhit');
-    // const widthel = document.querySelector('.enter-button');
     enter?.setAttribute('style', 'width: ');
-
-    // .width($('.enter-button').width());
 
     enter?.classList.add('enterhit');
 
@@ -368,72 +341,49 @@ function handleInput(text: string){
   }
 
 function fireRule(rule: string) {
+  document.querySelector(".shake")?.classList.remove("shake");
+  document.querySelectorAll(".strobe,.clean,.shake").forEach((el) => {
+    el.removeAttribute("style");
+  });
 
-  const shake = document.querySelector(".shake");
-  shake?.classList.remove("shake");
-
-//   const par = document.querySelectorAll(".strobe,.clean,.shake");
-//   par.forEach(function(){
-//     $(this).width($(this).width());
-//     $(this).removeAttr("style");
-//   });
-
-//   const baseTable = document.querySelector('.table');
-
-//   try {
-//     const rules = document.querySelector(".table");
-//     rules.find(rule).not(baseTable);
-//   }
-//   catch(err) {
-//     rule = null;
-//   }
-
+  const ruleSelectedtext = document.getElementsByTagName("input")[0].value;
   const ruleSelected = document.querySelector(".table")?.querySelector(rule);
-//   if(ruleSelectedin != baseTable){
-//     const ruleSelected = ruleSelectedin?.querySelector(rule);
-// }
-  const levelSelected = document.querySelector(".table")?.querySelector(level.selector);
-//   .not(baseTable); // What the person finds
 
-  const win = false;
+  const levelSelected = level.selector;
 
-//   if(ruleSelected.length == 0) {
-//     const edit = document.querySelector(".editor");
-//     edit?.classList.add("shake");
-//   }
-
-//   if(ruleSelected.length == levelSelected.length && ruleSelected.length > 0){
-//     win = checkResults(ruleSelected,levelSelected,rule);
-//   }
+  let win = false;
+ if (ruleSelectedtext === levelSelected){
+    win = true
+ } else {
+    document.querySelector(".editor")?.classList.add("shake");
+ }
 
   if(win){
     ruleSelected?.classList.remove("strobe");
     ruleSelected?.classList.add("clean");
-    // const winwin = document.querySelector("input");
-    // winwin?.getAttribute();
+    document.getElementsByTagName("input")[0].value = '';
+    // document.querySelector("input")?.setAttribute();
 
     const wrap = document.querySelector(".input-wrapper");
     wrap?.setAttribute("style", "opacity: 0.2");
-    // updateProgressUI(currentLevel, true);
+    updateProgressUI(currentLevel, true);
     currentLevel++;
 
-//     if(currentLevel >= levels.length) {
-//       winGame();
-//     } else {
-//       setTimeout(function(){
-//         loadLevel();
-//       },levelTimeout);
-//     }
-//   } else {
-//     ruleSelected?.classList.remove("strobe");
-//     ruleSelected?.classList.add("shake");
+    if(currentLevel >= levels.length) {
+      winGame();
+    } else {
+      setTimeout(function(){
+        loadLevel();
+      },levelTimeout);
+    }
+  } else {
+    ruleSelected?.classList.remove("strobe");
+    ruleSelected?.classList.add("shake");
 
     setTimeout(function(){
-      const shake = document.querySelector(".shake");
-      shake?.classList.remove("shake");
-      const strobe = document.querySelector(".strobe");
-      strobe?.classList.remove("strobe");
-      levelSelected?.classList.add("strobe");
+      document.querySelector(".shake")?.classList.remove("shake");
+      document.querySelector(".strobe")?.classList.remove("strobe");
+    //   levelSelected?.classList.add("strobe");
     },500);
 
     const result = document.querySelector(".result");
@@ -490,36 +440,14 @@ function trackProgress(levelNumber: number, type: string){
   localStorage.setItem("progress",JSON.stringify(progress));
 }
 
-// function sendEvent(category: string, action: string, label: number){
-//   if(!ga){
-//     return;
-//   }
-
-//   ga('send', {
-//     hitType: "event",
-//     eventCategory: category,
-//     eventAction: action,
-//     eventLabel: label
-//   });
-// }
-
-// function winGame(){
-//     const win = document.querySelector(".table");
-//     if(win){
-//         win.innerHTML ='<span class="winner"><strong>You did it!</strong><br>You rock at CSS.</span>';
-//     }
-//     addNametags();
-//     finished = true;
-//     resetTable();
-//   }
-
-//   function checkResults(ruleSelected: Element,levelSelected: Element ,rule: string){
-//     const ruleTable = document.querySelector(".table");
-//     ruleTable?.cloneNode(true);
-//     ruleTable?.querySelector(".strobe")?.classList.remove("strobe");
-//     ruleTable?.querySelector(rule)?.classList.add("strobe");
-//     return(document.querySelector(".table") == ruleTable);
-//   }
+function winGame(){
+    const win = document.querySelector(".table");
+    if(win){
+        win.innerHTML ='<span class="winner"><strong>You did it!</strong><br>You rock at CSS.</span>';
+    }
+    addNametags();
+    resetTable();
+  }
 
 function addAnimation(el: HTMLElement|null){
     if(el){
@@ -562,6 +490,15 @@ document.addEventListener('DOMContentLoaded', function () {
         enterHit();
       })
       buildLevelmenu();
+
+      const input = document.querySelector('input');
+      input?.addEventListener("keypress",function(e){
+        e.stopPropagation();
+        if(e.keyCode ==  13){
+          enterHit();
+          return false;
+        }
+      });
 
 })
 

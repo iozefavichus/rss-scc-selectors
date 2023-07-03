@@ -107,7 +107,7 @@ export const levels = [
     <apple></apple>
     <apple class="small"></apple>
     <plate>
-      <apple class="small"><apple class="small"></apple>
+      <apple class="small"></apple>
     </plate>
     <plate></plate>
     `,
