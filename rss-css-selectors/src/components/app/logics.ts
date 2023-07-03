@@ -106,7 +106,6 @@ function loadBoard() {
 
     const table = document.querySelector('.table');
     if (table) {
-        console.log(level.boardMarkup);
         table.innerHTML = level.boardMarkup;
         // level.boardMarkup.forEach((el:string, index:number) => {
         //     table.innerHTML = level.boardMarkup[index];

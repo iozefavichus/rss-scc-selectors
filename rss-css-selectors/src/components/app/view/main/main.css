@@ -1,7 +1,7 @@
 .main {
     width: calc(100% - 375px);
     text-align: center;
-    overflow-x: visible;
+    overflow-x: auto;
     position: fixed;
     top: 0;
     bottom: 0;
