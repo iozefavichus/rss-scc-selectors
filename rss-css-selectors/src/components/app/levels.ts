@@ -162,5 +162,80 @@ export const levels = [
     </bento>
     `,
     width: 574,
-  }
+  },
+  {
+    helpTitle: "Combine, selectors, with... commas!",
+    selectorName : "Comma Combinator",
+    doThis : "Select all the plates and bentos",
+    selector : "plate,bento",
+    syntax : "A, B",
+    help : 'Thanks to Shatner technology, this selects all <strong>A</strong> and <strong>B</strong> elements. You can combine any selectors this way, and you can specify more than two.',
+    examples: [
+    '<strong>p, .fun</strong> selects all <tag>p</tag> elements as well as all elements with <strong>class="fun"</strong>',
+    '<strong>a, p, div</strong> selects all <tag>a</tag>, <tag>p</tag> and <tag>div</tag> elements'
+    ],
+    boardMarkup : `
+    <pickle class="small"></pickle>
+    <pickle></pickle>
+    <plate>
+      <pickle></pickle>
+    </plate>
+    <bento>
+      <pickle></pickle>
+    </bento>
+    <plate>
+      <pickle></pickle>
+    </plate>
+    <pickle></pickle>
+    <pickle class="small"></pickle>
+    `,
+    width:574,
+  },
+  {
+    helpTitle: "You can select everything!",
+    selectorName:  "The Universal Selector",
+    doThis : "Select all the things!",
+    selector : "*",
+    syntax : "*",
+    help : 'You can select all elements with the universal selector! ',
+    examples : [
+      '<strong>p *</strong> selects any element inside all <tag>p</tag> elements.',
+    ],
+    boardMarkup : `
+    <apple></apple>
+    <plate>
+      <orange class="small"></orange>
+    </plate>
+    <bento></bento>
+    <bento>
+      <orange></orange>
+    </bento>
+    <plate id="fancy"></plate>
+    `,
+    width: 614,
+  },
+  {
+    helpTitle: "Combine the Universal Selector",
+    selectorName : "",
+    doThis : "Select everything on a plate",
+    selector : "plate *",
+    syntax : "A&nbsp;&nbsp;*",
+    help : 'This selects all elements inside of <strong>A</strong>.',
+    examples : [
+      '<strong>p *</strong> selects every element inside all <tag>p</tag> elements.',
+      '<strong>ul.fancy *</strong> selects every element inside all <tag>ul class="fancy"</tag> elements.'
+    ],
+    boardMarkup: `
+    <plate id="fancy">
+      <orange class="small"></orange>
+    </plate>
+    <plate>
+      <pickle></pickle>
+    </plate>
+    <apple class="small"></apple>
+    <plate>
+      <apple></apple>
+    </plate>`,
+    width: 574,
+  },
 ]
